@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>DIGIBACH</title>
+    <style>@import "digibach.css";</style>
+    <script type="text/javascript" src="digibach.js"></script>
+  </head>
+  <body>
+    <table>
+      {{#works}}
+        <tr>
+          <td>{{bwv}}</td>
+          <td><a href="{{work_url}}">{{{title}}}</a></td>
+          <td>
+            {{#sources}}
+              <ul>
+                <li><a href="{{pdf_path}}">{{title}}</a></li>
+              </ul>
+            {{/sources}}
+          </td>
+        </tr>
+      {{/works}}
+    </table>
+  </body>
+</html>

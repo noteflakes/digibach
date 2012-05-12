@@ -13,7 +13,8 @@ require File.join(File.dirname(__FILE__), 'thread_pool')
 trap("INT") {exit}
 trap("TERM") {exit}
 
-$sources = YAML.load(IO.read('sources.yml')) rescue []
+$sources = YAML.load(IO.read('sources.yml')) rescue nil
+$sources ||= []
 $last_sources = $sources.clone
 $start_sources = $sources.clone
 $pool = ThreadPool.new(20)
@@ -34,10 +35,10 @@ def check_work(id)
     
     return unless h.at_css('div.contentlinecontent')
     
-    title = h.at_css('div.contentlinecontent table tr td').inner_html.
+    work = h.at_css('div.contentlinecontent table tr td').inner_html.
       gsub(/\<br\s?\/?\>/m, " ").gsub(/\n/, " ").gsub(/\s{2,}/, " ").strip
     bwv = ''
-    case title
+    case work
     when /BWV\s+(\d+[a-z]?)/
       bwv = $1
     when /BWV\s(Anh\.\s+\d+[a-z]?)/
@@ -50,10 +51,13 @@ def check_work(id)
       bwv = $1
     end
     
+    title = h.css('div.contentlinecontent table tr td.metavalue')[1].inner_html.
+      gsub(/\<br\s?\/?\>/m, " ").gsub(/\n/, " ").gsub(/\s{2,}/, " ").strip
+    
     source_refs = h.css('a').select {|a| a['href'] =~ /BachDigitalSource/}
     refs = source_refs.map {|a| [a['href'], a.inner_text]}.uniq
     refs.each do |ref|
-      $pool.process {check_source(ref[0], ref[1], id, title, bwv)}
+      $pool.process {check_source(ref[0], ref[1], id, work, title, bwv)}
     end
   rescue => e
     puts "!!!!!!!!!!!!!!!!!!!!!!!!"
@@ -63,7 +67,7 @@ def check_work(id)
   end
 end
 
-def check_source(url, name, work_id, work, bwv)
+def check_source(url, name, work_id, work, title, bwv)
   source_already_marked = $sources.select {|s| s['href'] == url}.size > 0
   if source_already_marked || is_source_digitized?(url)
     unless source_already_marked
@@ -74,6 +78,7 @@ def check_source(url, name, work_id, work, bwv)
       $sources << {
         'work_id' => work_id,
         'work' => work,
+        'title' => title,
         'BWV' => bwv,
         'href' => url,
         'name' => name

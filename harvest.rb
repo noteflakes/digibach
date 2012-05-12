@@ -7,7 +7,7 @@ require 'httparty'
 require 'open-uri'
 require 'pp'
 
-HARVESTER_DIR = "/Volumes/SCHATZ EXT/digibach"
+TARGET_DIR = "/Volumes/SCHATZ EXT/digibach/sources"
 
 def open_url(url)
   r = HTTParty.get(url, :timeout => 60)
@@ -41,11 +41,10 @@ class String
 end
 
 class Harvester
-  def initialize(work, url, bwvs, work_dir)
+  def initialize(work, url, bwvs)
     @work = work
     @url = url
     @bwvs = bwvs
-    @work_dir = work_dir
     @h = Hpricot(open_url(@url))
   end
   
@@ -161,7 +160,7 @@ class Harvester
   def save_info
     # info = metadata.merge('jpg' => jpg_hrefs, 'dfg' => dfg_links)
     info = metadata.merge('hrefs' => dfg_info)
-    File.open(File.join(@work_dir, "#{title.safe_fn}.yml"), 'w+') {|f| f << info.to_yaml}
+    File.open(File.join(TARGET_DIR, "#{title.safe_fn}.yml"), 'w+') {|f| f << info.to_yaml}
   end
   
   def process_jpgs
@@ -179,7 +178,7 @@ class Harvester
   end
   
   def pdf_filename
-    File.join(@work_dir, "#{title.safe_fn}.pdf")
+    File.join(TARGET_DIR, "#{title.safe_fn}.pdf")
   end
   
   def make_pdf
@@ -215,26 +214,26 @@ class Harvester
     pdf.render_file(pdf_filename)
   end
   
-  def self.get_receipts(work_dir)
-    if File.file?(File.join(work_dir, "receipts.yml"))
-      YAML.load(IO.read(File.join(work_dir, "receipts.yml")))
+  def self.get_receipts
+    if File.file?(File.join(TARGET_DIR, "receipts.yml"))
+      YAML.load(IO.read(File.join(TARGET_DIR, "receipts.yml")))
     else
       {}
     end
   end
   
-  def self.set_receipts(r, work_dir)
-    File.open(File.join(work_dir, "receipts.yml"), 'w+') {|f| f << r.to_yaml}
+  def self.set_receipts(r)
+    File.open(File.join(TARGET_DIR, "receipts.yml"), 'w+') {|f| f << r.to_yaml}
   end
   
-  def self.already_processed?(href, work_dir)
-    get_receipts(work_dir)[href] || 
-      get_receipts(work_dir)[href.gsub('vmbach.rz.uni-leipzig.de/', 'vmbach.rz.uni-leipzig.de:8971/')] ||
-      get_receipts(work_dir)[href.gsub('www.bach-digital.de/', 'vmbach.rz.uni-leipzig.de:8971/')]
+  def self.already_processed?(href)
+    get_receipts[href] || 
+      get_receipts[href.gsub('vmbach.rz.uni-leipzig.de/', 'vmbach.rz.uni-leipzig.de:8971/')] ||
+      get_receipts[href.gsub('www.bach-digital.de/', 'vmbach.rz.uni-leipzig.de:8971/')]
   end
   
-  def self.record_receipt(href, work_dir)
-    set_receipts(get_receipts(work_dir).merge(href => true), work_dir)
+  def self.record_receipt(href)
+    set_receipts(get_receipts.merge(href => true))
   end
   
   def self.format_bwv_dir_name(bwv)
@@ -252,25 +251,20 @@ class Harvester
     bwvs = entry.map {|i| i['BWV']}.uniq
     if bwvs.size > 1
       range = "%s-%s" % [format_bwv_dir_name(bwvs[0]).safe_dir, format_bwv_dir_name(bwvs[-1]).safe_dir]
-      work_dir = File.join(HARVESTER_DIR, range)
       href = entry[0]['href']
     else
       entry = entry[0]
       work = format_bwv_dir_name(entry['BWV'])
-      work_dir = File.join(HARVESTER_DIR, work.safe_dir)
       href = entry['href']
     end
     
-    puts "work_dir: #{work_dir}"
-    
-    FileUtils.mkdir(work_dir) rescue nil
+    FileUtils.mkdir(TARGET_DIR) rescue nil
 
-    #Dir.chdir(work_dir) do
-    unless already_processed?(href, work_dir)
-      m = new(work, href, bwvs, work_dir)
+    unless already_processed?(href)
+      m = new(work, href, bwvs)
       m.save_info
       m.make_pdf
-      record_receipt(href, work_dir)
+      record_receipt(href)
     end
     #end
   rescue => e
@@ -288,18 +282,12 @@ manuscripts = YAML.load(IO.read('sources.yml')).inject({}) do |m, w|
   m
 end
 
-# require File.join(File.dirname(__FILE__), 'thread_pool')
-# $pool = ThreadPool.new(1)
-# 
-
 idx = 1
 
 manuscripts.each do |h, m|
   works = m.map {|i| Harvester.format_bwv_dir_name(i['BWV'])}.join(',')
   puts "(#{idx}) processing #{works}: #{m.first['name']}"
-  #$pool.process {Harvester.process(m)}
   Harvester.process(m)
   idx += 1
 end
 
-# $pool.join
