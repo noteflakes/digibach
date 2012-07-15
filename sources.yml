@@ -95,6 +95,12 @@
   BWV: "11"
   href: http://www.bach-digital.de/receive/BachDigitalSource_source_00003866
   name: PL Kj Mus. ms. Bach St 356  [frueher D B Mus. ms. Bach St 356]
+- work_id: 13
+  work: Bach-Werke-Verzeichnis BWV 11 / 249b-&gt; Bach-Compendium BC D 9
+  title: Lobet Gott in seinen Reichen (Himmelfahrtsoratorium)
+  BWV: "11"
+  href: http://www.bach-digital.de/receive/BachDigitalSource_source_00003866
+  name: "PL Kj Mus. ms. Bach St 356  [fr\xC3\xBCher D B Mus. ms. Bach St 356]"
 - work_id: 14
   work: Bach-Werke-Verzeichnis BWV 12 Bach-Compendium BC A 68
   title: Weinen, Klagen, Sorgen, Zagen (Kantate)
@@ -370,6 +376,12 @@
   title: Der Himmel lacht, die Erde jubilieret (Kantate)
   BWV: "31"
   href: http://www.bach-digital.de/receive/BachDigitalSource_source_00003857
+  name: "PL Kj Mus. ms. Bach St 14, Faszikel 2  [fr\xC3\xBCher D B Mus. ms. Bach St 14, Faszikel 2]"
+- work_id: 40
+  work: Bach-Werke-Verzeichnis BWV 31 Bach-Compendium BC A 55b
+  title: Der Himmel lacht, die Erde jubilieret (Kantate)
+  BWV: "31"
+  href: http://www.bach-digital.de/receive/BachDigitalSource_source_00003857
   name: PL Kj Mus. ms. Bach St 14, Faszikel 2  [frueher D B Mus. ms. Bach St 14, Faszikel 2]
 - work_id: 40
   work: Bach-Werke-Verzeichnis BWV 31 Bach-Compendium BC A 55b
@@ -381,6 +393,18 @@
   work: Bach-Werke-Verzeichnis BWV 31 Bach-Compendium BC A 55b
   title: Der Himmel lacht, die Erde jubilieret (Kantate)
   BWV: "31"
+  href: http://www.bach-digital.de/receive/BachDigitalSource_source_00003858
+  name: "PL Kj Mus. ms. Bach St 14, Faszikel 3 [fr\xC3\xBCher D B Mus. ms. Bach St 14, Faszikel 3]"
+- work_id: 40
+  work: Bach-Werke-Verzeichnis BWV 31 Bach-Compendium BC A 55b
+  title: Der Himmel lacht, die Erde jubilieret (Kantate)
+  BWV: "31"
+  href: http://www.bach-digital.de/receive/BachDigitalSource_source_00003859
+  name: "PL Kj Mus. ms. Bach St 14, Faszikel 4  [fr\xC3\xBCher D B Mus. ms. Bach St 14, Faszikel 4]"
+- work_id: 40
+  work: Bach-Werke-Verzeichnis BWV 31 Bach-Compendium BC A 55b
+  title: Der Himmel lacht, die Erde jubilieret (Kantate)
+  BWV: "31"
   href: http://www.bach-digital.de/receive/BachDigitalSource_source_00003859
   name: PL Kj Mus. ms. Bach St 14, Faszikel 4  [frueher D B Mus. ms. Bach St 14, Faszikel 4]
 - work_id: 41
@@ -388,7 +412,19 @@
   title: Der Himmel lacht, die Erde jubilieret (Kantate, Fr&#252;hfassung)
   BWV: "31"
   href: http://www.bach-digital.de/receive/BachDigitalSource_source_00003856
+  name: "PL Kj Mus. ms. Bach St 14, Faszikel 1 [fr\xC3\xBCher D B Mus. ms. Bach St 14, Faszikel 1]"
+- work_id: 41
+  work: Bach-Werke-Verzeichnis BWV 31 Bach-Compendium BC A 55a
+  title: Der Himmel lacht, die Erde jubilieret (Kantate, Fr&#252;hfassung)
+  BWV: "31"
+  href: http://www.bach-digital.de/receive/BachDigitalSource_source_00003856
   name: PL Kj Mus. ms. Bach St 14, Faszikel 1 [frueher D B Mus. ms. Bach St 14, Faszikel 1]
+- work_id: 41
+  work: Bach-Werke-Verzeichnis BWV 31 Bach-Compendium BC A 55a
+  title: Der Himmel lacht, die Erde jubilieret (Kantate, Fr&#252;hfassung)
+  BWV: "31"
+  href: http://www.bach-digital.de/receive/BachDigitalSource_source_00003858
+  name: "PL Kj Mus. ms. Bach St 14, Faszikel 3 [fr\xC3\xBCher D B Mus. ms. Bach St 14, Faszikel 3]"
 - work_id: 41
   work: Bach-Werke-Verzeichnis BWV 31 Bach-Compendium BC A 55a
   title: Der Himmel lacht, die Erde jubilieret (Kantate, Fr&#252;hfassung)
@@ -2243,6 +2279,12 @@
   BWV: "215"
   href: http://www.bach-digital.de/receive/BachDigitalSource_source_00001006
   name: D B Mus. ms. Bach P 139
+- work_id: 271
+  work: Bach-Werke-Verzeichnis BWV 215 Bach-Compendium BC G 21
+  title: Preise dein Gl&#252;cke, gesegnetes Sachsen (Kantate)
+  BWV: "215"
+  href: http://www.bach-digital.de/receive/BachDigitalSource_source_00002402
+  name: D B Mus. ms. Bach St 77
 - work_id: 273
   work: Bach-Werke-Verzeichnis BWV 216a Bach-Compendium BC [G 47]
   title: Erw&#228;hlte Plei&#223;enstadt (Kantate)
@@ -2885,6 +2927,120 @@
   BWV: "600"
   href: http://www.bach-digital.de/receive/BachDigitalSource_source_00000787
   name: D B N. Mus. ms. 10117
+- work_id: 683
+  work: Bach-Werke-Verzeichnis BWV 600
+  title: Gott durch deine G&#252;te / Gottes Sohn ist kommen (Choralbearbeitung, Orgelb&#252;chlein)
+  BWV: "600"
+  href: http://www.bach-digital.de/receive/BachDigitalSource_source_00001229
+  name: D B Mus. ms. Bach P 283
+- work_id: 684
+  work: Bach-Werke-Verzeichnis BWV 601
+  title: Herr Christ, der ein'ge Gottes Sohn / Herr Gott, nun sei gepreiset (Choralbearbeitung, Orgelb&#252;chlein)
+  BWV: "601"
+  href: http://www.bach-digital.de/receive/BachDigitalSource_source_00001229
+  name: D B Mus. ms. Bach P 283
+- work_id: 685
+  work: Bach-Werke-Verzeichnis BWV 602
+  title: Lob sei dem allm&#228;chtigen Gott (Choralbearbeitung, Orgelb&#252;chlein)
+  BWV: "602"
+  href: http://www.bach-digital.de/receive/BachDigitalSource_source_00001229
+  name: D B Mus. ms. Bach P 283
+- work_id: 686
+  work: Bach-Werke-Verzeichnis BWV 603
+  title: Puer natus in Bethlehem (Choralbearbeitung, Orgelb&#252;chlein)
+  BWV: "603"
+  href: http://www.bach-digital.de/receive/BachDigitalSource_source_00001229
+  name: D B Mus. ms. Bach P 283
+- work_id: 687
+  work: Bach-Werke-Verzeichnis BWV 604
+  title: Gelobet seist du, Jesu Christ (Choralbearbeitung, Orgelb&#252;chlein)
+  BWV: "604"
+  href: http://www.bach-digital.de/receive/BachDigitalSource_source_00001229
+  name: D B Mus. ms. Bach P 283
+- work_id: 688
+  work: Bach-Werke-Verzeichnis BWV 605
+  title: Der Tag, der ist so freudenreich (Choralbearbeitung, Orgelb&#252;chlein)
+  BWV: "605"
+  href: http://www.bach-digital.de/receive/BachDigitalSource_source_00001229
+  name: D B Mus. ms. Bach P 283
+- work_id: 689
+  work: Bach-Werke-Verzeichnis BWV 606
+  title: Vom Himmel hoch, da komm ich her (Choralbearbeitung, Orgelb&#252;chlein)
+  BWV: "606"
+  href: http://www.bach-digital.de/receive/BachDigitalSource_source_00001229
+  name: D B Mus. ms. Bach P 283
+- work_id: 690
+  work: Bach-Werke-Verzeichnis BWV 607
+  title: Vom Himmel kam der Engel Schar (Choralbearbeitung, Orgelb&#252;chlein)
+  BWV: "607"
+  href: http://www.bach-digital.de/receive/BachDigitalSource_source_00001229
+  name: D B Mus. ms. Bach P 283
+- work_id: 691
+  work: Bach-Werke-Verzeichnis BWV 608
+  title: In dulci jubilo (Choralbearbeitung, Orgelb&#252;chlein)
+  BWV: "608"
+  href: http://www.bach-digital.de/receive/BachDigitalSource_source_00001229
+  name: D B Mus. ms. Bach P 283
+- work_id: 692
+  work: Bach-Werke-Verzeichnis BWV 609
+  title: Lobt Gott, ihr Christen allzugleich (Choralbearbeitung, Orgelb&#252;chlein)
+  BWV: "609"
+  href: http://www.bach-digital.de/receive/BachDigitalSource_source_00001229
+  name: D B Mus. ms. Bach P 283
+- work_id: 693
+  work: Bach-Werke-Verzeichnis BWV 610
+  title: Jesu, meine Freude (Choralbearbeitung, Orgelb&#252;chlein)
+  BWV: "610"
+  href: http://www.bach-digital.de/receive/BachDigitalSource_source_00001229
+  name: D B Mus. ms. Bach P 283
+- work_id: 694
+  work: Bach-Werke-Verzeichnis BWV 611
+  title: Christum wir sollen loben schon (Choralbearbeitung, Orgelb&#252;chlein)
+  BWV: "611"
+  href: http://www.bach-digital.de/receive/BachDigitalSource_source_00001229
+  name: D B Mus. ms. Bach P 283
+- work_id: 695
+  work: Bach-Werke-Verzeichnis BWV 612
+  title: Wir Christenleut (Choralbearbeitung, Orgelb&#252;chlein)
+  BWV: "612"
+  href: http://www.bach-digital.de/receive/BachDigitalSource_source_00001229
+  name: D B Mus. ms. Bach P 283
+- work_id: 696
+  work: Bach-Werke-Verzeichnis BWV 613
+  title: Helft mir Gotts G&#252;te preisen (Choralbearbeitung, Orgelb&#252;chlein)
+  BWV: "613"
+  href: http://www.bach-digital.de/receive/BachDigitalSource_source_00001229
+  name: D B Mus. ms. Bach P 283
+- work_id: 697
+  work: Bach-Werke-Verzeichnis BWV 614
+  title: Das alte Jahr vergangen ist (Choralbearbeitung, Orgelb&#252;chlein)
+  BWV: "614"
+  href: http://www.bach-digital.de/receive/BachDigitalSource_source_00001229
+  name: D B Mus. ms. Bach P 283
+- work_id: 698
+  work: Bach-Werke-Verzeichnis BWV 615
+  title: In dir ist Freude (Choralbearbeitung, Orgelb&#252;chlein)
+  BWV: "615"
+  href: http://www.bach-digital.de/receive/BachDigitalSource_source_00001229
+  name: D B Mus. ms. Bach P 283
+- work_id: 699
+  work: Bach-Werke-Verzeichnis BWV 616
+  title: Mit Fried und Freud ich fahr dahin (Choralbearbeitung, Orgelb&#252;chlein)
+  BWV: "616"
+  href: http://www.bach-digital.de/receive/BachDigitalSource_source_00001229
+  name: D B Mus. ms. Bach P 283
+- work_id: 700
+  work: Bach-Werke-Verzeichnis BWV 617
+  title: Herr Gott, nun schleu&#223; den Himmel auf (Choralbearbeitung, Orgelb&#252;chlein)
+  BWV: "617"
+  href: http://www.bach-digital.de/receive/BachDigitalSource_source_00001229
+  name: D B Mus. ms. Bach P 283
+- work_id: 701
+  work: Bach-Werke-Verzeichnis BWV 618
+  title: O Lamm Gottes, unschuldig (Choralbearbeitung, Orgelb&#252;chlein)
+  BWV: "618"
+  href: http://www.bach-digital.de/receive/BachDigitalSource_source_00001229
+  name: D B Mus. ms. Bach P 283
 - work_id: 702
   work: Bach-Werke-Verzeichnis BWV 619
   title: Christe, du Lamm Gottes (Choralbearbeitung, Orgelb&#252;chlein)
@@ -4699,6 +4855,12 @@
   name: D B Mus. ms. Bach P 89
 - work_id: 1534
   work: Bach-Werke-Verzeichnis BWV deest Bach-Compendium BC D 5a Bachs Notenbibliothek BNB I/K/1
+  title: Passionspasticcio "Jesus Christus ist um unser Missetat willen verwundet" (Markuspassion, Weimarer Fassung)
+  BWV: BC D 5a
+  href: http://www.bach-digital.de/receive/BachDigitalSource_source_00018426
+  name: D B Mus. ms. 11471/1
+- work_id: 1534
+  work: Bach-Werke-Verzeichnis BWV deest Bach-Compendium BC D 5a Bachs Notenbibliothek BNB I/K/1
   title: Passionspasticcio "Jesus Christus ist um unsrer Missetat willen verwundet" (Markuspassion, Weimarer Fassung)
   BWV: BC D 5a
   href: http://www.bach-digital.de/receive/BachDigitalSource_source_00018426
@@ -4742,6 +4904,12 @@
 - work_id: 1680
   work: Bach-Werke-Verzeichnis BWV deest (Serie II:5) Bachs Notenbibliothek BNB I/K/2
   title: Jesus Christus ist um unsrer Missetat willen verwundet (Markuspassion, 2. Leipziger Fassung)
+  BWV: Serie II:5
+  href: http://www.bach-digital.de/receive/BachDigitalSource_source_00000763
+  name: D B N. Mus. ms. 468
+- work_id: 1680
+  work: Bach-Werke-Verzeichnis BWV deest (Serie II:5) Bachs Notenbibliothek BNB I/K/2
+  title: Passionspasticcio "Jesus Christus ist um unser Missetat willen verwundet" (Markuspassion, 2. Leipziger Fassung, um 1747)
   BWV: Serie II:5
   href: http://www.bach-digital.de/receive/BachDigitalSource_source_00000763
   name: D B N. Mus. ms. 468
