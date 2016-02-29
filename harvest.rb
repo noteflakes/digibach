@@ -1,20 +1,41 @@
 require 'rubygems'
 require 'prawn'
-require 'prawn/layout'
 require 'fileutils'
-require 'hpricot'
+require 'nokogiri'
 require 'httparty'
 require 'open-uri'
 require 'pp'
 
-TARGET_DIR = "/Volumes/SCHATZ EXT/digibach/sources"
+Prawn::Font::AFM.hide_m17n_warning = true
+
+require File.expand_path(File.dirname(__FILE__), 'dezoomify')
+
+TARGET_DIR = File.expand_path("~/digibach")
+FileUtils.mkdir_p(TARGET_DIR) rescue nil
+
+DERIVATE_URL_PATTERN = "http://www.bach-digital.de/servlets/MCRMETSServlet/%s?XSL.Style=dfg-source"
+
+require 'net/http/persistent'
+$http_connections = {}
+def http_conn
+  $http_connections[Thread.current] ||= 
+    Net::HTTP::Persistent.new('crawl').tap do |h|
+      h.read_timeout = 30
+      h.open_timeout = 30
+    end
+end
 
 def open_url(url)
-  r = HTTParty.get(url, :timeout => 60)
+  r = http_conn.request URI(url)
+  # r = HTTParty.get(url, :timeout => 60)
   r.body
 rescue Timeout::Error
   puts "timeout while getting #{url}"
   ''
+end
+
+def open_xml(url)
+  Nokogiri::XML(open_url(url))
 end
 
 class String
@@ -44,23 +65,24 @@ class Harvester
   def initialize(work, url, bwvs)
     @work = work
     @url = url
+    @nice_url = (@url =~ /^(.+)\?/) && $1
     @bwvs = bwvs
-    @h = Hpricot(open_url(@url))
+    @h = open_xml(@url)
+    @h.remove_namespaces!
   end
   
-  def dfg_links
-    @dfg_links ||= (@h/'td.dfgviewDerivateLink a').map do |a| 
-      a['href'] =~ /set\[mets\]=([^&]+)/
-      $1.uri_unescape
+  def derivate_links
+    @derivate_links ||= (@h/:derobject).select {|n| n['title'] =~ /zoomify/}.map do |n| 
+      DERIVATE_URL_PATTERN % n['href']
     end
   end
   
-  def dfg_docs
-    @dfg_docs ||= dfg_links.map do |l|
+  def derivate_docs
+    @derivate_docs ||= derivate_links.map do |l|
       begin
-        xml = open_url(l)
-        doc = Hpricot(xml)
-        (doc/'mets:mets').empty? ? nil : doc
+        doc = open_xml(l)
+        doc.remove_namespaces!
+        doc
       rescue
         nil
       end
@@ -68,120 +90,86 @@ class Harvester
   end
   
   def title
-    @title ||= metadata['title']
+    @title ||= (@h/:mcrstructure)[0]['classmark']
   end
   
   def metadata
     unless @meta
       @meta = {}
-      h = dfg_docs.first
-      raise "No valid DFG doc found" if h.nil?
       @meta['work'] = @work
       @meta['bwvs'] = @bwvs
       @meta['url'] = @url
-      @meta['title'] = h.at('mods:title').inner_text
-      @meta['owner'] = h.at('dv:owner').inner_text
-      @meta['date'] = h.at('mods:dateissued').inner_text
+      @meta['title'] = (@h/:mcrstructure)[0]['classmark']
     end
     @meta
   end
   
-  def dfg_jpg_hrefs(dfg)
-    (dfg/'mets:file mets:flocat').map {|f| f['xlink:href'].gsub(':8971', '').
-      gsub('//vmbach.rz.uni-leipzig.de/', '//www.bach-digital.de/')}.sort
-  end
-  
-  def dfg_info
-    dfg_links.inject([]) do |m, l|
+  def derivate_info
+    derivate_links.inject([]) do |m, l|
       begin
-        m << [l, dfg_jpg_hrefs(Hpricot(open_url(l)))]
+        # m << [l, derivate_jpg_hrefs(Hpricot(open_url(l)))]
+        m << l
       rescue
       end
       m
     end
   end
   
-  # Creates a list of jpgs from the dfg docs (a dfg doc is provided for each movement in the work)
+  # Creates a list of jpgs from the derivate docs (a derivate doc is provided for each movement in the work)
   def jpg_hrefs
     last_label = ''
-    last_href = ''
+    last_jpg_url = ''
     doc_counter = -1
-    @jpg_hrefs ||= dfg_docs.inject([]) do |jpgs, d|
+    
+    @jpg_hrefs ||= derivate_docs.inject([]) do |jpgs, doc|
       doc_counter += 1 # keep counter in sync
+
+      # Labels do not seem to appear in the zoomify XML files, so they'll be nil
+      labels = (doc/'structMap[@TYPE="PHYSICAL"]'/'div[@TYPE="page"]').map do |n|
+        n['ORDERLABEL']
+      end
       
-      # get all refs: [page_label, fileid]
-      files = (d/'mets:structmap mets:div mets:div').
-        map do |page|
-          label = page['orderlabel'] || page['order']
-          if label =~ /_((page|ante|post).+)$/
-            label = $1
-          end
-          [label, page.at('mets:fptr')['fileid'], page['id']]
-        end
-        
-      files.each do |file|
-        label = file[0]
-        if (label =~ /Bl\.\s*([^\,\.]+)/)
-          label = $1
-        end
-        
-        label.strip!
-        
-        file_tag = (d/"mets:file").select {|f| f['id'] == file[1]}.first
-        if file_tag
-          href = file_tag.at("mets:flocat")['xlink:href'].safe_uri_escape.gsub(':8971', '')
-          if label.empty?
-            if file[2] =~ /((page|post|pre|ante)(.+))$/
-              label = $1
-            else
-              label = file[2]
-            end
-          end
-          
-          if href !~ /^http/
-            href = "%s/%s?mode=getImage&XSL.MCR.Module-iview.navi.zoom=1" %
-              [dfg_links[doc_counter].gsub(/\?.+$/, '').gsub('MCRMETSServlet', 'MCRIViewServlet'), href]
-          end
-          
-          
-          if (File.basename(href) != File.basename(last_href))
-            last_label = label
-            last_href = href
-            jpgs << [label, href]
-          else # same page as before, so we add the ref to the last page tuple
-            jpgs.last << href
-          end
+      urls = (doc/'fileGrp[@USE="MAX"]'/'FLocat').map do |n|
+        n['href']
+      end
+      
+      urls.each do |u|
+        if File.basename(u) != File.basename(last_jpg_url)
+          jpgs << [labels.shift, u]
+          last_jpg_url = u
         end
       end
+
       jpgs
     end
   end
   
   def save_info
-    # info = metadata.merge('jpg' => jpg_hrefs, 'dfg' => dfg_links)
-    info = metadata.merge('hrefs' => dfg_info)
+    info = metadata.merge('hrefs' => derivate_info)
     File.open(File.join(TARGET_DIR, "#{title.safe_fn}.yml"), 'w+') {|f| f << info.to_yaml}
   end
   
   def process_jpgs
     jpg_hrefs.each do |page_info|
       label = page_info.shift
-      # Different refs for the same page may exist in different dfg docs,
+      # Different refs for the same page may exist in different derivate docs,
       # here we just grab the first one that works and yield it to the 
       # supplied block.
       jpg = page_info.inject(nil) do |i, href|
-        puts "Downloading #{label}...(#{href})"
-        (jpg = open(href)) && (break jpg) rescue nil
+        (jpg = dezoomify_jpg(href)) && (break jpg) rescue nil
       end
       yield jpg, label, page_info
     end
+    # STDOUT << "\n"
   end
   
   def pdf_filename
-    File.join(TARGET_DIR, "#{title.safe_fn}.pdf")
+    "#{TARGET_DIR}/#{title.safe_fn}.pdf"
   end
   
   def make_pdf
+    return if derivate_docs.empty?
+    
     pdf = Prawn::Document.new(:page_size => 'A4'); first = true
     pdf.font "Helvetica"
     pdf.font_size = 9
@@ -191,10 +179,11 @@ class Harvester
       page += 1
       # page identification
       pdf.text "page #{page}", :align => :center
-      pdf.text "#{@work} - #{title} - #{label}", :font_size => 7, :align => :center
+      pdf.text "#{@work} - <link href='#{@nice_url}'><u>#{title}</u></link>", 
+        inline_format: true, font_size: 7, align: :center
       if jpg
         begin
-          pdf.image jpg, :position => :center, :vposition => :center, :fit => [520, 700]
+          pdf.image StringIO.new(jpg), :position => :center, :vposition => :center, :fit => [520, 700]
         rescue
           pdf.text "", :font_size => 20, :align => :left
           text = hrefs.inject("Failed to load jpg for #{label}:\n") do |t, r|
@@ -212,6 +201,7 @@ class Harvester
       end
     end
     pdf.render_file(pdf_filename)
+    puts
   end
   
   def self.get_receipts
@@ -226,14 +216,16 @@ class Harvester
     File.open(File.join(TARGET_DIR, "receipts.yml"), 'w+') {|f| f << r.to_yaml}
   end
   
-  def self.already_processed?(href)
-    get_receipts[href] || 
-      get_receipts[href.gsub('vmbach.rz.uni-leipzig.de/', 'vmbach.rz.uni-leipzig.de:8971/')] ||
-      get_receipts[href.gsub('www.bach-digital.de/', 'vmbach.rz.uni-leipzig.de:8971/')]
+  def self.already_processed?(href, name)
+    Thread.exclusive do
+      get_receipts[href] && File.file?("#{TARGET_DIR}/#{name.safe_fn}.pdf")
+    end
   end
   
   def self.record_receipt(href)
-    set_receipts(get_receipts.merge(href => true))
+    Thread.exclusive do
+      set_receipts(get_receipts.merge(href => true))
+    end
   end
   
   def self.format_bwv_dir_name(bwv)
@@ -249,18 +241,19 @@ class Harvester
   
   def self.process(entry)
     bwvs = entry.map {|i| i['BWV']}.uniq
+    href = entry[0]['href']
+    name = entry[0]['name']
+
     if bwvs.size > 1
       range = "%s-%s" % [format_bwv_dir_name(bwvs[0]).safe_dir, format_bwv_dir_name(bwvs[-1]).safe_dir]
-      href = entry[0]['href']
     else
       entry = entry[0]
       work = format_bwv_dir_name(entry['BWV'])
-      href = entry['href']
     end
     
     FileUtils.mkdir(TARGET_DIR) rescue nil
 
-    unless already_processed?(href)
+    unless already_processed?(href, name)
       m = new(work, href, bwvs)
       m.save_info
       m.make_pdf
@@ -276,7 +269,8 @@ end
 trap('INT') {exit}
 trap('TERM') {exit}
 
-manuscripts = YAML.load(IO.read('sources.yml')).inject({}) do |m, w|
+$sources = YAML.load(IO.read('sources.yml'))
+manuscripts = $sources.inject({}) do |m, w|
   href = w['href']
   (m[href] ||= []) << w
   m

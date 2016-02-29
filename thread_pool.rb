@@ -4,7 +4,7 @@ class ThreadPool
       @mutex = Mutex.new
       @thread = Thread.new do
         while true
-          sleep 0.001
+          sleep 0.01
           block = get_block
           if block
             block.call
@@ -32,6 +32,12 @@ class ThreadPool
     def busy?
       @mutex.synchronize {!@block.nil?}
     end
+    
+    def exit
+      @thread.exit
+      @thread = nil
+      @mutex = nil
+    end
   end
   
   attr_accessor :max_size
@@ -53,6 +59,17 @@ class ThreadPool
   
   def join
     sleep 0.01 while busy?
+  end
+  
+  def kill_all
+    @workers.each {|t| t.exit}
+    @workers = []
+    @mutex = nil
+  end
+  
+  def join_and_kill_all
+    join
+    kill_all
   end
   
   def process(&block)
