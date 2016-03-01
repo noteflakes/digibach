@@ -72,7 +72,8 @@ class Harvester
   end
   
   def derivate_links
-    @derivate_links ||= (@h/:derobject).select {|n| n['title'] =~ /zoomify/}.map do |n| 
+    @derivate_links ||= (@h/:derobject).select {|n| n['title'] =~ /zoomify/}.
+      sort_by {|n| n =~ /^(\d+) zoomify$/ && $1.to_i}.map do |n| 
       DERIVATE_URL_PATTERN % n['href']
     end
   end
@@ -183,23 +184,25 @@ class Harvester
         inline_format: true, font_size: 7, align: :center
       if jpg
         begin
-          pdf.image StringIO.new(jpg), :position => :center, :vposition => :center, :fit => [520, 700]
+          pdf.image StringIO.new(jpg), position: :center, vposition: :center, 
+            fit: [520, 700]
         rescue
-          pdf.text "", :font_size => 20, :align => :left
+          pdf.text "", font_size: 20, align: :left
           text = hrefs.inject("Failed to load jpg for #{label}:\n") do |t, r|
             t << "  #{r}\n"
           end
-          pdf.text text, :font_size => 9, :align => :left
+          pdf.text text, font_size: 9, align: :left
         end
       else
-        puts "could not load jpg for #{label}"
+        puts "could not add #{hrefs.inspect}"
         text = hrefs.inject("Could not load jpg for #{label}:\n") do |t, r|
           t << "  #{r}\n"
         end
-        pdf.text "", :font_size => 20, :align => :left
-        pdf.text text, :font_size => 14, :align => :left
+        pdf.text "", font_size: 20, align: :left
+        pdf.text text, font_size: 14, align: :left
       end
     end
+    STDOUT << "*"
     pdf.render_file(pdf_filename)
     puts
   end
