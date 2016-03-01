@@ -1,0 +1,31 @@
+GEM
+  remote: https://rubygems.org/
+  specs:
+    httparty (0.13.7)
+      json (~> 1.8)
+      multi_xml (>= 0.5.2)
+    json (1.8.3)
+    mini_portile2 (2.0.0)
+    multi_xml (0.5.5)
+    mustache (0.12.0)
+    net-http-persistent (2.9.4)
+    nokogiri (1.6.7.2)
+      mini_portile2 (~> 2.0.0.rc2)
+    pdf-core (0.6.0)
+    prawn (2.0.2)
+      pdf-core (~> 0.6.0)
+      ttfunk (~> 1.4.0)
+    ttfunk (1.4.0)
+
+PLATFORMS
+  ruby
+
+DEPENDENCIES
+  httparty (= 0.13.7)
+  mustache (= 0.12.0)
+  net-http-persistent (= 2.9.4)
+  nokogiri (~> 1.6.7)
+  prawn (= 2.0.2)
+
+BUNDLED WITH
+   1.10.6
