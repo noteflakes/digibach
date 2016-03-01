@@ -16,6 +16,7 @@ require File.join(File.dirname(__FILE__), 'thread_pool')
 TEMP_DIRECTORY = "/tmp"
 TILES_DIRECTORY = "#{TEMP_DIRECTORY}/tiles"
 ZOOMIFY_URL_PATTERN = "http://www.bach-digital.de/servlets/MCRZipFileNodeServlet/%s"
+BASE_URL = "http://www.bach-digital.de"
 
 require 'net/http/persistent'
 $http_connections = {}
@@ -29,7 +30,13 @@ end
 
 def dzopen_url(url)
   r = dz_http_conn.request URI(url)
-  # r = HTTParty.get(url, :timeout => 60)
+  
+  if ['301', '302'].include?(r.code)
+    r.header['location'] =~ /^([^;]+)/
+    new_url = BASE_URL + $1
+    return dzopen_url(new_url) 
+  end
+
   r.body
 rescue Timeout::Error
   puts "timeout while getting #{url}"
@@ -59,7 +66,10 @@ end
 $dezoomify_pool = ThreadPool.new(10)
 
 def dezoomify_jpg(url)
-  return unless url =~ /MCRDFGServlet\/[^\/]+\/(.+)\.zip$/
+  unless url =~ /MCRDFGServlet\/[^\/]+\/(.+)\.zip$/
+    return dzdownload_url(url)
+  end
+    
   url = ZOOMIFY_URL_PATTERN % $1
   
   basename = File.basename(url)
@@ -126,7 +136,12 @@ def dezoomify_jpg(url)
 
   STDOUT << "."
 
-  `montage #{files.join(' ')} -geometry +0+0 -tile #{tiles_wide}x#{tiles_high} #{jpg_filename} 2>/dev/null`
+  FileUtils.rm_f('dezoomify.err') if File.file?('dezoomify.err')
+  `montage #{files.join(' ')} -geometry +0+0 -tile #{tiles_wide}x#{tiles_high} #{jpg_filename} 2>dezoomify.err`
+  unless $?.success?
+    puts "Failed to compose #{url}:"
+    puts IO.read('dezoomify.err')
+  end
   
   # delete tiles
   FileUtils.rm_rf("#{TEMP_DIRECTORY}/tiles/#{basename.gsub('_', '/')}") rescue nil
