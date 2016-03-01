@@ -56,7 +56,7 @@ def qualify_fn(fn)
   fn
 end
 
-$dezoomify_pool = ThreadPool.new(5)
+$dezoomify_pool = ThreadPool.new(10)
 
 def dezoomify_jpg(url)
   return unless url =~ /MCRDFGServlet\/[^\/]+\/(.+)\.zip$/
@@ -126,7 +126,7 @@ def dezoomify_jpg(url)
 
   STDOUT << "."
 
-  `montage #{files.join(' ')} -geometry +0+0 -tile #{tiles_wide}x#{tiles_high} #{jpg_filename}`
+  `montage #{files.join(' ')} -geometry +0+0 -tile #{tiles_wide}x#{tiles_high} #{jpg_filename} 2>/dev/null`
   
   # delete tiles
   FileUtils.rm_rf("#{TEMP_DIRECTORY}/tiles/#{basename.gsub('_', '/')}") rescue nil
