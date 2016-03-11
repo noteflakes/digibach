@@ -12,142 +12,85 @@ require 'nokogiri'
 require 'thread'
 require 'fileutils'
 require File.join(File.dirname(__FILE__), 'thread_pool')
+require File.join(File.dirname(__FILE__), 'cache')
 
-TEMP_DIRECTORY = "/tmp"
-TILES_DIRECTORY = "#{TEMP_DIRECTORY}/tiles"
 ZOOMIFY_URL_PATTERN = "http://www.bach-digital.de/servlets/MCRZipFileNodeServlet/%s"
 BASE_URL = "http://www.bach-digital.de"
-
-require 'net/http/persistent'
-$http_connections = {}
-def dz_http_conn
-  $http_connections[Thread.current] ||= 
-    Net::HTTP::Persistent.new('crawl').tap do |h|
-      h.read_timeout = 30
-      h.open_timeout = 30
-    end
-end
-
-def dzopen_url(url)
-  r = dz_http_conn.request URI(url)
-  
-  if ['301', '302'].include?(r.code)
-    r.header['location'] =~ /^([^;]+)/
-    new_url = BASE_URL + $1
-    return dzopen_url(new_url) 
-  end
-
-  r.body
-rescue Timeout::Error
-  puts "timeout while getting #{url}"
-  ''
-end
-
-def dzdownload_url(url)
-  data = nil
-  retries = 0
-  while !data
-    data = dzopen_url(url) rescue nil
-    retries += 1
-    if retries > 10
-      puts "Failed to download #{url}"
-      raise "Failed to download #{url}"
-    end
-  end
-  data
-end
-
-def qualify_fn(fn)
-  fn = "#{TEMP_DIRECTORY}/#{fn.gsub('_', '/')}"
-  FileUtils.mkdir_p(File.dirname(fn))
-  fn
-end
 
 $dezoomify_pool = ThreadPool.new(10)
 
 def dezoomify_jpg(url)
   unless url =~ /MCRDFGServlet\/[^\/]+\/(.+)\.zip$/
-    return dzdownload_url(url)
+    return Cache.cached_download(url)
   end
     
   url = ZOOMIFY_URL_PATTERN % $1
   
-  basename = File.basename(url)
-  jpg_filename = qualify_fn("#{basename}.jpg")
-
-  if File.file?(jpg_filename)
-    STDOUT << '.'
-    return IO.read(jpg_filename)
-  end
+  jpg_filename = Cache.url_cache_path(url)
+  STDOUT << "."
+  Cache.get(Cache.key(url)) do
+    xml_url = "#{url}/ImageProperties.xml"
+    doc = Cache.cached_xml(xml_url)
+    props = doc.at('IMAGE_PROPERTIES')
+    unless props
+      raise "Failed to get image properties for #{xml_url}"
+    end
   
-  xml_url = "#{url}/ImageProperties.xml"
-  doc = Nokogiri::XML(dzopen_url(xml_url))
-  props = doc.at('IMAGE_PROPERTIES')
+    width = props[:WIDTH].to_i
+    height = props[:HEIGHT].to_i
+    tilesize = props[:TILESIZE].to_f
+
+    tiles_wide = (width/tilesize).ceil
+    tiles_high = (height/tilesize).ceil
+
+    # Determine max zoom level.
+    # Also determine tile_counts per zoom level, used to determine tile group.
+    # With thanks to http://trac.openlayers.org/attachment/ticket/1285/zoomify.patch.
+    zoom = 0
+    w = width
+    h = height
+    tile_counts = []
+    while w > tilesize || h > tilesize
+      zoom += 1
+
+      t_wide = (w / tilesize).ceil
+      t_high = (h / tilesize).ceil
+      tile_counts.unshift t_wide*t_high
+
+      w = (w / 2.0).floor
+      h = (h / 2.0).floor
+    end
+    tile_counts.unshift 1  # Zoom level 0 has a single tile.
+    tile_count_before_level = tile_counts[0..-2].inject(0) {|sum, num| sum + num }
   
-  width = props[:WIDTH].to_i
-  height = props[:HEIGHT].to_i
-  tilesize = props[:TILESIZE].to_f
-
-  tiles_wide = (width/tilesize).ceil
-  tiles_high = (height/tilesize).ceil
-
-  # Determine max zoom level.
-  # Also determine tile_counts per zoom level, used to determine tile group.
-  # With thanks to http://trac.openlayers.org/attachment/ticket/1285/zoomify.patch.
-  zoom = 0
-  w = width
-  h = height
-  tile_counts = []
-  while w > tilesize || h > tilesize
-    zoom += 1
-
-    t_wide = (w / tilesize).ceil
-    t_high = (h / tilesize).ceil
-    tile_counts.unshift t_wide*t_high
-
-    w = (w / 2.0).floor
-    h = (h / 2.0).floor
-  end
-  tile_counts.unshift 1  # Zoom level 0 has a single tile.
-  tile_count_before_level = tile_counts[0..-2].inject(0) {|sum, num| sum + num }
-  
-  files = []
-  
-  tiles_high.times do |y|
-    tiles_wide.times do |x|
-      tile_url = ""
-      tilename = '%s-%s-%s.jpg' % [zoom, x, y]
-      local_filepath = qualify_fn("tiles/#{basename}/#{tilename}")
-      files << local_filepath
-
-      $dezoomify_pool.process do
+    tile_files = []
+    
+    tiles_high.times do |y|
+      tiles_wide.times do |x|
         tile_group = ((x + y * tiles_wide + tile_count_before_level) / tilesize).floor
-
+        tilename = '%s-%s-%s.jpg' % [zoom, x, y]
         tile_url = "#{url}/TileGroup#{tile_group}/#{tilename}"
-        File.open(local_filepath, 'wb') {|f| f << dzdownload_url(tile_url) }
+        
+        tile_files << Cache.url_cache_path(tile_url)
+        $dezoomify_pool.process {Cache.cached_download(tile_url)}
       end
     end
-  end
-  $dezoomify_pool.join
+    $dezoomify_pool.join
 
-  # `montage` is ImageMagick.
-  # We first stitch together the tiles of each row, then stitch all rows.
-  # Stitching the full image all at once can get extremely inefficient for large images.
+    FileUtils.rm_f('dezoomify.err') if File.file?('dezoomify.err')
+    `montage #{tile_files.join(' ')} -geometry +0+0 -tile #{tiles_wide}x#{tiles_high} #{jpg_filename} 2>dezoomify.err`
+    unless $?.success?
+      puts "Failed to compose #{url}:"
+      puts IO.read('dezoomify.err')
+    end
+  
+    # delete tiles
+    tile_files.each {|fn| FileUtils.rm(fn) rescue nil}
 
-  STDOUT << "."
-
-  FileUtils.rm_f('dezoomify.err') if File.file?('dezoomify.err')
-  `montage #{files.join(' ')} -geometry +0+0 -tile #{tiles_wide}x#{tiles_high} #{jpg_filename} 2>dezoomify.err`
-  unless $?.success?
-    puts "Failed to compose #{url}:"
-    puts IO.read('dezoomify.err')
+    IO.read(jpg_filename)
   end
   
-  # delete tiles
-  FileUtils.rm_rf("#{TEMP_DIRECTORY}/tiles/#{basename.gsub('_', '/')}") rescue nil
-  
-
-  IO.read(jpg_filename)
 rescue => e
   puts e.message
+  puts e.backtrace.join("\n")
 end

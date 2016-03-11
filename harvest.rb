@@ -4,13 +4,14 @@ require 'fileutils'
 require 'nokogiri'
 require 'httparty'
 require 'open-uri'
+require File.join(File.dirname(__FILE__), 'cache')
 require 'pp'
 
 Prawn::Font::AFM.hide_m17n_warning = true
 
 require File.expand_path(File.dirname(__FILE__), 'dezoomify')
 
-TARGET_DIR = File.expand_path("~/digibach")
+TARGET_DIR = "/Volumes/SDG/digibach/sources"
 FileUtils.mkdir_p(TARGET_DIR) rescue nil
 
 DERIVATE_URL_PATTERN = "http://www.bach-digital.de/servlets/MCRMETSServlet/%s?XSL.Style=dfg-source"
@@ -23,19 +24,6 @@ def http_conn
       h.read_timeout = 30
       h.open_timeout = 30
     end
-end
-
-def open_url(url)
-  r = http_conn.request URI(url)
-  # r = HTTParty.get(url, :timeout => 60)
-  r.body
-rescue Timeout::Error
-  puts "timeout while getting #{url}"
-  ''
-end
-
-def open_xml(url)
-  Nokogiri::XML(open_url(url))
 end
 
 class String
@@ -62,32 +50,33 @@ class String
 end
 
 class Harvester
+  NICE_WORK_URL_PATTERN = "http://www.bach-digital.de/receive/%s"
+  
   def initialize(work, url, bwvs)
     @work = work
     @url = url
     @nice_url = (@url =~ /^(.+)\?/) && $1
     @bwvs = bwvs
-    @h = open_xml(@url)
-    @h.remove_namespaces!
+    @h = Cache.cached_xml(@url)
+  end
+  
+  def page_number_for_sorting(page_ref)
+    if page_ref =~ /(\d+)([a-z]+)/
+      $1.to_i + ($2.bytes[0] - 'a'.bytes[0] + 1).to_f / 25
+    else
+      page_ref.to_i
+    end
   end
   
   def derivate_links
     @derivate_links ||= (@h/:derobject).select {|n| n['title'] =~ /zoomify/}.
-      sort_by {|n| n =~ /^(\d+) zoomify$/ && $1.to_i}.map do |n| 
-      DERIVATE_URL_PATTERN % n['href']
-    end
+      sort_by {|n| (n['title'] =~ /^([0-9a-z]+) zoomify$/) && page_number_for_sorting($1)}.
+      map {|n| DERIVATE_URL_PATTERN % n['href'] }
   end
   
   def derivate_docs
-    @derivate_docs ||= derivate_links.map do |l|
-      begin
-        doc = open_xml(l)
-        doc.remove_namespaces!
-        doc
-      rescue
-        nil
-      end
-    end.compact
+    @derivate_docs ||= 
+      derivate_links.map {|l| doc = Cache.cached_xml(l) rescue nil}.compact
   end
   
   def title
@@ -106,42 +95,31 @@ class Harvester
   end
   
   def derivate_info
-    derivate_links.inject([]) do |m, l|
-      begin
-        # m << [l, derivate_jpg_hrefs(Hpricot(open_url(l)))]
-        m << l
-      rescue
-      end
-      m
-    end
+    derivate_links.inject([]) {|m, l| m << l}
   end
   
-  # Creates a list of jpgs from the derivate docs (a derivate doc is provided for each movement in the work)
-  def jpg_hrefs
-    last_label = ''
-    last_jpg_url = ''
-    doc_counter = -1
-    
-    @jpg_hrefs ||= derivate_docs.inject([]) do |jpgs, doc|
-      doc_counter += 1 # keep counter in sync
+  # Creates a list of pages from the derivate docs (a derivate doc is provided for each movement or section in the work)
+  def page_refs
+    last_page = ''
+    @page_hrefs ||= derivate_docs.inject([]) do |pages, doc|
+      derivate_url = DERIVATE_URL_PATTERN % doc.at('amdSec')['ID']
+      derivate_url.gsub!('amd_', '')
 
-      # Labels do not seem to appear in the zoomify XML files, so they'll be nil
-      labels = (doc/'structMap[@TYPE="PHYSICAL"]'/'div[@TYPE="page"]').map do |n|
-        n['ORDERLABEL']
-      end
-      
-      urls = (doc/'fileGrp[@USE="MAX"]'/'FLocat').map do |n|
-        n['href']
-      end
-      
-      urls.each do |u|
-        if File.basename(u) != File.basename(last_jpg_url)
-          jpgs << [labels.shift, u]
-          last_jpg_url = u
-        end
+      page_elements = (doc/"structMap[TYPE='PHYSICAL']//div[TYPE='page']").
+        sort_by {|p| p['ORDER'].to_i }
+        
+      page_ids = page_elements.map {|p| p.at('fptr[FILEID^="MAX"]')['FILEID'] }
+
+      page_ids.each do |id|
+        page_url = doc.at("file[ID='#{id}']/FLocat")['href']
+        pages << {
+          page_id:      id,
+          page_url:     page_url,
+          derivate_url: derivate_url
+        }
       end
 
-      jpgs
+      pages
     end
   end
   
@@ -150,61 +128,70 @@ class Harvester
     File.open(File.join(TARGET_DIR, "#{title.safe_fn}.yml"), 'w+') {|f| f << info.to_yaml}
   end
   
-  def process_jpgs
-    jpg_hrefs.each do |page_info|
-      label = page_info.shift
-      # Different refs for the same page may exist in different derivate docs,
-      # here we just grab the first one that works and yield it to the 
-      # supplied block.
-      jpg = page_info.inject(nil) do |i, href|
-        (jpg = dezoomify_jpg(href)) && (break jpg) rescue nil
-      end
-      yield jpg, label, page_info
+  def process_pages
+    refs = page_refs
+    STDOUT << "found #{refs.size} pages"
+    refs.each do |info|
+      info[:jpg] = dezoomify_jpg(info[:page_url])
+      yield info
     end
-    # STDOUT << "\n"
   end
   
   def pdf_filename
     "#{TARGET_DIR}/#{title.safe_fn}.pdf"
   end
   
+  def format_link(text, href)
+    "<link href='#{href}'><u>#{text}</u></link>"
+  end
+  
   def make_pdf
     return if derivate_docs.empty?
+    
+    t1 = Time.now
     
     pdf = Prawn::Document.new(:page_size => 'A4'); first = true
     pdf.font "Helvetica"
     pdf.font_size = 9
+    
+    work_refs = (@h/"source32s[class='MCRMetaLinkID']//[type='locator']")
+    
+    header1 = "%s (%s)" % [
+      format_link(title, @nice_url),
+      work_refs.map {|r| format_link(r['title'], NICE_WORK_URL_PATTERN % r['href'])}.join(", ")
+    ]
+    
+    header1.encode!('Windows-1252', invalid: :replace, undef: :replace, replace: '?')
+    text_opts = {inline_format: true, font_size: 7, align: :center}
+    
     page = 0
-    process_jpgs do |jpg, label, hrefs|
+    first = true
+    
+    process_pages do |info|
       pdf.start_new_page unless first; first = false;
       page += 1
       # page identification
-      pdf.text "page #{page}", :align => :center
-      pdf.text "#{@work} - <link href='#{@nice_url}'><u>#{title}</u></link>", 
-        inline_format: true, font_size: 7, align: :center
-      if jpg
+      
+      header2 = "page #{page} - #{format_link('derivate', info[:derivate_url])}"
+      header2.encode!('Windows-1252', invalid: :replace, undef: :replace, replace: '?')
+      
+      pdf.text header1, text_opts
+      pdf.text header2, text_opts.merge(font_size: 5)
+      if info[:jpg]
         begin
-          pdf.image StringIO.new(jpg), position: :center, vposition: :center, 
+          pdf.image StringIO.new(info[:jpg]), position: :center, vposition: :center, 
             fit: [520, 700]
         rescue
-          pdf.text "", font_size: 20, align: :left
-          text = hrefs.inject("Failed to load jpg for #{label}:\n") do |t, r|
-            t << "  #{r}\n"
-          end
-          pdf.text text, font_size: 9, align: :left
+          pdf.text "Failed to load jpg", text_opts
         end
       else
-        puts "could not add #{hrefs.inspect}"
-        text = hrefs.inject("Could not load jpg for #{label}:\n") do |t, r|
-          t << "  #{r}\n"
-        end
-        pdf.text "", font_size: 20, align: :left
-        pdf.text text, font_size: 14, align: :left
+        pdf.text "no jpg for page", text_opts
       end
     end
-    STDOUT << "*"
-    pdf.render_file(pdf_filename)
-    puts
+    STDOUT << "* #{page} pages (#{Time.now - t1}s) "
+    t1 = Time.now
+    pdf.render_file(pdf_filename) 
+    puts "* render (#{Time.now - t1}s)"
   end
   
   def self.get_receipts
@@ -283,6 +270,7 @@ idx = 1
 
 manuscripts.each do |h, m|
   works = m.map {|i| Harvester.format_bwv_dir_name(i['BWV'])}.join(',')
+  next unless works.include?('BWV0244')
   puts "(#{idx}) processing #{works}: #{m.first['name']}"
   Harvester.process(m)
   idx += 1
