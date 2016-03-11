@@ -270,7 +270,6 @@ idx = 1
 
 manuscripts.each do |h, m|
   works = m.map {|i| Harvester.format_bwv_dir_name(i['BWV'])}.join(',')
-  next unless works.include?('BWV0244')
   puts "(#{idx}) processing #{works}: #{m.first['name']}"
   Harvester.process(m)
   idx += 1
