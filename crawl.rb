@@ -90,6 +90,12 @@ rescue => e
   e.backtrace.each {|l| puts l}
 end
 
+SEMAPHORE = Mutex.new
+
+def exclusive(&block)
+  SEMAPHORE.synchronize(&block)
+end
+
 def check_source(url, name, work_id, work, title, bwv)
   STDOUT << "."
   source_already_marked = $sources.select {|s| s['href'] == url}.size > 0
@@ -97,7 +103,7 @@ def check_source(url, name, work_id, work, title, bwv)
     unless source_already_marked
       puts "found source for BWV #{bwv}: #{name}"
     end
-    Thread.exclusive do
+    exclusive do
       $sources << {
         'work_id' => work_id,
         'work' => work,
@@ -117,7 +123,7 @@ def is_source_digitized?(url)
   return $digitized_map[url] if $digitized_map.has_key?(url)
 
   h = open_xml(url)
-  Thread.exclusive do
+  exclusive do
     $digitized_map[url] = (h/"mcritem[@type='source']"/:derobject).size > 0
   end
 end

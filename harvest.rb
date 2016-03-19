@@ -6,6 +6,7 @@ require 'httparty'
 require 'open-uri'
 require File.join(File.dirname(__FILE__), 'cache')
 require 'pp'
+require 'thread'
 
 Prawn::Font::AFM.hide_m17n_warning = true
 
@@ -207,13 +208,13 @@ class Harvester
   end
   
   def self.already_processed?(href, name)
-    Thread.exclusive do
+    exclusive do
       get_receipts[href] && File.file?("#{TARGET_DIR}/#{name.safe_fn}.pdf")
     end
   end
   
   def self.record_receipt(href)
-    Thread.exclusive do
+    exclusive do
       set_receipts(get_receipts.merge(href => true))
     end
   end
@@ -254,6 +255,12 @@ class Harvester
     puts "Failed to process source for #{work}: #{e.message}"
     e.backtrace.each {|l| puts l}
   end
+  
+  SEMAPHORE = Mutex.new
+  
+  def self.exclusive(&block)
+    SEMAPHORE.synchronize(&block)
+  end
 end
 
 trap('INT') {exit}
@@ -270,6 +277,8 @@ idx = 1
 
 manuscripts.each do |h, m|
   works = m.map {|i| Harvester.format_bwv_dir_name(i['BWV'])}.join(',')
+  next unless works.include?('BWV0248')
+  
   puts "(#{idx}) processing #{works}: #{m.first['name']}"
   Harvester.process(m)
   idx += 1
