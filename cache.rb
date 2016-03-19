@@ -31,10 +31,15 @@ module Cache
     
     def cached_xml(url)
       xml = cached_download(url)
-      if xml =~ /<html>/
-        xml = open_url(url)
-        raise "Server seems to be down" if xml =~ /<html>/
-        set(key(url), xml)
+      if xml =~ /<html/
+        del(key(url))
+        o = Nokogiri::XML(xml).at("[class='dpt_error_message_trace']") rescue nil
+        if o
+          msg = o.content.strip
+          puts "Error signaled downloading #{url}:"
+          puts msg
+        end
+        raise
       end
       
       Nokogiri::XML(xml).tap {|d| d.remove_namespaces!}
@@ -64,6 +69,10 @@ module Cache
     def set(key, value)
       path = key_to_path(key)
       File.open(path, 'w') {|f| f << value }
+    end
+    
+    def del(key)
+      File.rm(key_to_path(key)) rescue nil
     end
     
     def open_url(url, retry_count = 0)
