@@ -2,13 +2,14 @@
 
 require 'rubygems'
 require "bundler/setup"
+require 'yaml'
 
 require 'mustache'
 
 Mustache.template_path = File.dirname(__FILE__)
 Mustache.template_extension = 'html'
 
-TARGET_DIR = "/Volumes/SCHATZ EXT/digibach"
+TARGET_DIR = "/Volumes/SDG/digibach"
 
 $works = {}
 

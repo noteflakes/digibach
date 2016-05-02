@@ -32,6 +32,7 @@ module Cache
     def cached_xml(url)
       xml = cached_download(url)
       if xml =~ /<html/
+        msg = "Failed to load XML"
         del(key(url))
         o = Nokogiri::XML(xml).at("[class='dpt_error_message_trace']") rescue nil
         if o
@@ -39,7 +40,7 @@ module Cache
           puts "Error signaled downloading #{url}:"
           puts msg
         end
-        raise
+        raise msg
       end
       
       Nokogiri::XML(xml).tap {|d| d.remove_namespaces!}

@@ -65,6 +65,12 @@
   BWV: '7'
   href: http://www.bach-digital.de/receive/BachDigitalSource_source_00003221?XSL.Style=structure
   name: D-LEb Thomana 7
+- work_id: 9
+  work: BWV 8
+  title: Liebster Gott, wann werd ich sterben [1. Fassung] BWV 8
+  BWV: '8'
+  href: http://www.bach-digital.de/receive/BachDigitalSource_source_00001952?XSL.Style=structure
+  name: D-B Mus. ms. Bach P 963
 - work_id: 10
   work: BWV 8
   title: Liebster Gott, wann werd ich sterben [2. Fassung] BWV 8
@@ -579,6 +585,12 @@
   work: BWV 38
   title: Aus tiefer Not schrei ich zu dir BWV 38
   BWV: '38'
+  href: http://www.bach-digital.de/receive/BachDigitalSource_source_00001980?XSL.Style=structure
+  name: D-B Mus. ms. Bach P 1025
+- work_id: 53
+  work: BWV 38
+  title: Aus tiefer Not schrei ich zu dir BWV 38
+  BWV: '38'
   href: http://www.bach-digital.de/receive/BachDigitalSource_source_00003229?XSL.Style=structure
   name: D-LEb Thomana 38
 - work_id: 54
@@ -617,6 +629,12 @@
   BWV: '41'
   href: http://www.bach-digital.de/receive/BachDigitalSource_source_00001911?XSL.Style=structure
   name: D-B Mus. ms. Bach P 874
+- work_id: 56
+  work: BWV 41
+  title: Jesu, nun sei gepreiset BWV 41
+  BWV: '41'
+  href: http://www.bach-digital.de/receive/BachDigitalSource_source_00001981?XSL.Style=structure
+  name: D-B Mus. ms. Bach P 1026
 - work_id: 56
   work: BWV 41
   title: Jesu, nun sei gepreiset BWV 41
@@ -863,6 +881,12 @@
   BWV: '62'
   href: http://www.bach-digital.de/receive/BachDigitalSource_source_00001913?XSL.Style=structure
   name: D-B Mus. ms. Bach P 877
+- work_id: 78
+  work: BWV 62
+  title: Nun komm, der Heiden Heiland BWV 62
+  BWV: '62'
+  href: http://www.bach-digital.de/receive/BachDigitalSource_source_00001982?XSL.Style=structure
+  name: D-B Mus. ms. Bach P 1027
 - work_id: 78
   work: BWV 62
   title: Nun komm, der Heiden Heiland BWV 62
@@ -1269,6 +1293,12 @@
   work: BWV 94
   title: Was frag ich nach der Welt BWV 94
   BWV: '94'
+  href: http://www.bach-digital.de/receive/BachDigitalSource_source_00001983?XSL.Style=structure
+  name: D-B Mus. ms. Bach P 1028
+- work_id: 119
+  work: BWV 94
+  title: Was frag ich nach der Welt BWV 94
+  BWV: '94'
   href: http://www.bach-digital.de/receive/BachDigitalSource_source_00003239?XSL.Style=structure
   name: D-LEb Thomana 94, Faszikel 1 [Originalstimmensatz]
 - work_id: 119
@@ -1299,6 +1329,12 @@
   work: BWV 97
   title: In allen meinen Taten BWV 97
   BWV: '97'
+  href: http://www.bach-digital.de/receive/BachDigitalSource_source_00001984?XSL.Style=structure
+  name: D-B Mus. ms. Bach P 1029
+- work_id: 122
+  work: BWV 97
+  title: In allen meinen Taten BWV 97
+  BWV: '97'
   href: http://www.bach-digital.de/receive/BachDigitalSource_source_00002390?XSL.Style=structure
   name: D-B Mus. ms. Bach St 64
 - work_id: 123
@@ -1319,6 +1355,18 @@
   BWV: '99'
   href: http://www.bach-digital.de/receive/BachDigitalSource_source_00001710?XSL.Style=structure
   name: D-B Mus. ms. Bach P 647
+- work_id: 124
+  work: BWV 99
+  title: Was Gott tut, das ist wohlgetan BWV 99
+  BWV: '99'
+  href: http://www.bach-digital.de/receive/BachDigitalSource_source_00001985?XSL.Style=structure
+  name: D-B Mus. ms. Bach P 1030, Faszikel 1
+- work_id: 124
+  work: BWV 99
+  title: Was Gott tut, das ist wohlgetan BWV 99
+  BWV: '99'
+  href: http://www.bach-digital.de/receive/BachDigitalSource_source_00001986?XSL.Style=structure
+  name: D-B Mus. ms. Bach P 1030, Faszikel 2
 - work_id: 124
   work: BWV 99
   title: Was Gott tut, das ist wohlgetan BWV 99
@@ -1347,8 +1395,20 @@
   work: BWV 101
   title: Nimm von uns, Herr, du treuer Gott BWV 101
   BWV: '101'
+  href: http://www.bach-digital.de/receive/BachDigitalSource_source_00001876?XSL.Style=structure
+  name: D-B Mus. ms. Bach P 830
+- work_id: 126
+  work: BWV 101
+  title: Nimm von uns, Herr, du treuer Gott BWV 101
+  BWV: '101'
   href: http://www.bach-digital.de/receive/BachDigitalSource_source_00001943?XSL.Style=structure
   name: D-B Mus. ms. Bach P 951
+- work_id: 126
+  work: BWV 101
+  title: Nimm von uns, Herr, du treuer Gott BWV 101
+  BWV: '101'
+  href: http://www.bach-digital.de/receive/BachDigitalSource_source_00001987?XSL.Style=structure
+  name: D-B Mus. ms. Bach P 1031
 - work_id: 126
   work: BWV 101
   title: Nimm von uns, Herr, du treuer Gott BWV 101
@@ -1497,6 +1557,18 @@
   work: BWV 114
   title: Ach, lieben Christen, seid getrost BWV 114
   BWV: '114'
+  href: http://www.bach-digital.de/receive/BachDigitalSource_source_00001953?XSL.Style=structure
+  name: D-B Mus. ms. Bach P 964
+- work_id: 139
+  work: BWV 114
+  title: Ach, lieben Christen, seid getrost BWV 114
+  BWV: '114'
+  href: http://www.bach-digital.de/receive/BachDigitalSource_source_00001991?XSL.Style=structure
+  name: D-B Mus. ms. Bach P 1035
+- work_id: 139
+  work: BWV 114
+  title: Ach, lieben Christen, seid getrost BWV 114
+  BWV: '114'
   href: http://www.bach-digital.de/receive/BachDigitalSource_source_00003247?XSL.Style=structure
   name: D-LEb Thomana 114
 - work_id: 141
@@ -1625,6 +1697,12 @@
   BWV: '124'
   href: http://www.bach-digital.de/receive/BachDigitalSource_source_00003252?XSL.Style=structure
   name: D-LEb Thomana 124
+- work_id: 152
+  work: BWV 125
+  title: Mit Fried und Freud fahr ich dahin BWV 125
+  BWV: '125'
+  href: http://www.bach-digital.de/receive/BachDigitalSource_source_00001988?XSL.Style=structure
+  name: D-B Mus. ms. Bach P 1032
 - work_id: 152
   work: BWV 125
   title: Mit Fried und Freud fahr ich dahin BWV 125
@@ -1840,6 +1918,18 @@
   work: BWV 137
   title: Lobe den Herren, den mächtigen König der Ehren BWV 137
   BWV: '137'
+  href: http://www.bach-digital.de/receive/BachDigitalSource_source_00001997?XSL.Style=structure
+  name: D-B Mus. ms. Bach P 1040
+- work_id: 169
+  work: BWV 137
+  title: Lobe den Herren, den mächtigen König der Ehren BWV 137
+  BWV: '137'
+  href: http://www.bach-digital.de/receive/BachDigitalSource_source_00002090?XSL.Style=structure
+  name: D-B Mus. ms. Bach P 1142
+- work_id: 169
+  work: BWV 137
+  title: Lobe den Herren, den mächtigen König der Ehren BWV 137
+  BWV: '137'
   href: http://www.bach-digital.de/receive/BachDigitalSource_source_00003261?XSL.Style=structure
   name: D-LEb Thomana 137
 - work_id: 170
@@ -1854,6 +1944,12 @@
   BWV: '139'
   href: http://www.bach-digital.de/receive/BachDigitalSource_source_00003262?XSL.Style=structure
   name: D-LEb Thomana 139
+- work_id: 172
+  work: BWV 140
+  title: Wachet auf, ruft uns die Stimme BWV 140
+  BWV: '140'
+  href: http://www.bach-digital.de/receive/BachDigitalSource_source_00002089?XSL.Style=structure
+  name: D-B Mus. ms. Bach P 1141
 - work_id: 172
   work: BWV 140
   title: Wachet auf, ruft uns die Stimme BWV 140
@@ -1986,6 +2082,12 @@
   BWV: '158'
   href: http://www.bach-digital.de/receive/BachDigitalSource_source_00002004?XSL.Style=structure
   name: D-B Mus. ms. Bach P 1047
+- work_id: 193
+  work: BWV 159
+  title: Sehet, wir gehn hinauf gen Jerusalem BWV 159
+  BWV: '159'
+  href: http://www.bach-digital.de/receive/BachDigitalSource_source_00002005?XSL.Style=structure
+  name: D-B Mus. ms. Bach P 1048
 - work_id: 197
   work: BWV 162
   title: Ach! ich sehe, itzt, da ich zur Hochzeit gehe BWV 162
@@ -2152,6 +2254,12 @@
   work: BWV 177
   title: Ich ruf zu dir, Herr Jesu Christ BWV 177
   BWV: '177'
+  href: http://www.bach-digital.de/receive/BachDigitalSource_source_00002006?XSL.Style=structure
+  name: D-B Mus. ms. Bach P 1049
+- work_id: 215
+  work: BWV 177
+  title: Ich ruf zu dir, Herr Jesu Christ BWV 177
+  BWV: '177'
   href: http://www.bach-digital.de/receive/BachDigitalSource_source_00003264?XSL.Style=structure
   name: D-LEb Thomana 177
 - work_id: 216
@@ -2288,13 +2396,13 @@
   name: D-B Mus. ms. Bach St 4
 - work_id: 225
   work: BWV 186
-  title: "Ärgre dich, o Seele, nicht BWV 186"
+  title: Ärgre dich, o Seele, nicht BWV 186
   BWV: '186'
   href: http://www.bach-digital.de/receive/BachDigitalSource_source_00000915?XSL.Style=structure
   name: D-B Mus. ms. Bach P 53
 - work_id: 225
   work: BWV 186
-  title: "Ärgre dich, o Seele, nicht BWV 186"
+  title: Ärgre dich, o Seele, nicht BWV 186
   BWV: '186'
   href: http://www.bach-digital.de/receive/BachDigitalSource_source_00003138?XSL.Style=structure
   name: D-LEb Go. S. 5
@@ -2630,6 +2738,12 @@
   BWV: '211'
   href: http://www.bach-digital.de/receive/BachDigitalSource_source_00001008?XSL.Style=structure
   name: D-B Mus. ms. Bach P 141
+- work_id: 267
+  work: BWV 211
+  title: Schweigt stille, plaudert nicht (Kaffee-Kantate) BWV 211
+  BWV: '211'
+  href: http://www.bach-digital.de/receive/BachDigitalSource_source_00002010?XSL.Style=structure
+  name: D-B Mus. ms. Bach P 1053
 - work_id: 268
   work: BWV 212
   title: Mer hahn en neue Oberkeet - Cantate en burlesque (Bauernkantate) BWV 212
@@ -3660,6 +3774,12 @@
   work: BWV 532
   title: Praeludium und Fuge in D BWV 532
   BWV: '532'
+  href: http://www.bach-digital.de/receive/BachDigitalSource_source_00003352?XSL.Style=structure
+  name: D-LEb Peters Ms. 7, Faszikel 11 (Depositum im Bach-Archiv)
+- work_id: 604
+  work: BWV 532
+  title: Praeludium und Fuge in D BWV 532
+  BWV: '532'
   href: http://www.bach-digital.de/receive/BachDigitalSource_source_00003593?XSL.Style=structure
   name: D-Sl Cod. mus. II, fol. 288
 - work_id: 606
@@ -3692,6 +3812,12 @@
   BWV: '533'
   href: http://www.bach-digital.de/receive/BachDigitalSource_source_00002965?XSL.Style=structure
   name: D-LEb Rara Ib, 86 (olim D Gb Ms. Scholz 5.9.5)
+- work_id: 607
+  work: BWV 533a
+  title: Praeludium und Fuge in e BWV 533a
+  BWV: 533a
+  href: http://www.bach-digital.de/receive/BachDigitalSource_source_00003358?XSL.Style=structure
+  name: D-LEb Peters Ms. 7, Faszikel 17 (Depositum im Bach-Archiv)
 - work_id: 609
   work: BWV 535
   title: Praeludium und Fuge in g BWV 535
@@ -3980,6 +4106,12 @@
   BWV: '551'
   href: http://www.bach-digital.de/receive/BachDigitalSource_source_00001656?XSL.Style=structure
   name: D-B Mus. ms. Bach P 595, Faszikel 7
+- work_id: 631
+  work: BWV 551
+  title: Praeludium und Fuge in a BWV 551
+  BWV: '551'
+  href: http://www.bach-digital.de/receive/BachDigitalSource_source_00003352?XSL.Style=structure
+  name: D-LEb Peters Ms. 7, Faszikel 11 (Depositum im Bach-Archiv)
 - work_id: 632
   work: BWV 552
   title: Praeludium und Fuge a 5 (Es-Dur) (Klavierübung 3. Teil) BWV 552
@@ -4118,6 +4250,12 @@
   BWV: '564'
   href: http://www.bach-digital.de/receive/BachDigitalSource_source_00001782?XSL.Style=structure
   name: D-B Mus. ms. Bach P 803, Faszikel 11
+- work_id: 644
+  work: BWV 564
+  title: Toccata in C BWV 564
+  BWV: '564'
+  href: http://www.bach-digital.de/receive/BachDigitalSource_source_00024447?XSL.Style=structure
+  name: D-LEsta 21081/7369, Faszikel 1
 - work_id: 645
   work: BWV 565
   title: Toccata in d BWV 565
@@ -4194,6 +4332,12 @@
   work: BWV 572
   title: Fantasie G-Dur (Pièce d'Orgue) BWV 572
   BWV: '572'
+  href: http://www.bach-digital.de/receive/BachDigitalSource_source_00002051?XSL.Style=structure
+  name: D-B Mus. ms. Bach P 1092
+- work_id: 652
+  work: BWV 572
+  title: Fantasie G-Dur (Pièce d'Orgue) BWV 572
+  BWV: '572'
   href: http://www.bach-digital.de/receive/BachDigitalSource_source_00002903?XSL.Style=structure
   name: D-LEb Rara Ib, 2 (olim D Gb Ms. Scholz 4.7.2)
 - work_id: 653
@@ -4204,10 +4348,28 @@
   name: D-B Mus. ms. Bach P 224 [1. Klavierbüchlein der A. M. Bach, 1722]
 - work_id: 654
   work: BWV 574
+  title: Fuge in c BWV 574
+  BWV: '574'
+  href: http://www.bach-digital.de/receive/BachDigitalSource_source_00002052?XSL.Style=structure
+  name: D-B Mus. ms. Bach P 1093
+- work_id: 654
+  work: BWV 574
   title: Fuge in c (über ein Thema von G. Legrenzi) BWV 574
   BWV: '574'
   href: http://www.bach-digital.de/receive/BachDigitalSource_source_00002900?XSL.Style=structure
   name: D-LEb Rara Ib, 105 (olim D Gb Ms. Scholz 4.6.5)
+- work_id: 654
+  work: BWV 574
+  title: Fuge in c BWV 574
+  BWV: '574'
+  href: http://www.bach-digital.de/receive/BachDigitalSource_source_00002900?XSL.Style=structure
+  name: D-LEb Rara Ib, 105 (olim D Gb Ms. Scholz 4.6.5)
+- work_id: 656
+  work: BWV 574b
+  title: Fuge in c BWV 574b
+  BWV: 574b
+  href: http://www.bach-digital.de/receive/BachDigitalSource_source_00003278?XSL.Style=structure
+  name: D-LEm III.8.4 [Andreas-Bach-Buch]
 - work_id: 656
   work: BWV 574b
   title: Fuge in c (über ein Thema von G. Legrenzi) BWV 574b
@@ -4920,6 +5082,12 @@
   BWV: '619'
   href: http://www.bach-digital.de/receive/BachDigitalSource_source_00001229?XSL.Style=structure
   name: D-B Mus. ms. Bach P 283
+- work_id: 702
+  work: BWV 619
+  title: Christe, du Lamm Gottes (Orgelbüchlein) BWV 619
+  BWV: '619'
+  href: http://www.bach-digital.de/receive/BachDigitalSource_source_00001742?XSL.Style=structure
+  name: D-B Mus. ms. Bach P 778
 - work_id: 702
   work: BWV 619
   title: Christe, du Lamm Gottes (Orgelbüchlein) BWV 619
@@ -6424,6 +6592,12 @@
   BWV: '690'
   href: http://www.bach-digital.de/receive/BachDigitalSource_source_00002068?XSL.Style=structure
   name: D-B Mus. ms. Bach P 1109
+- work_id: 807
+  work: BWV 690
+  title: Wer nur den lieben Gott lässt walten (Kirnberger-Sammlung) BWV 690
+  BWV: '690'
+  href: http://www.bach-digital.de/receive/BachDigitalSource_source_00002076?XSL.Style=structure
+  name: D-B Mus. ms. Bach P 1117
 - work_id: 808
   work: BWV 691
   title: Wer nur den lieben Gott lässt walten (Kirnberger-Sammlung) BWV 691
@@ -6598,6 +6772,12 @@
   BWV: 732a
   href: http://www.bach-digital.de/receive/BachDigitalSource_source_00001776?XSL.Style=structure
   name: D-B Mus. ms. Bach P 802
+- work_id: 859
+  work: BWV 734
+  title: Nun freut euch, lieben Christen g'mein BWV 734
+  BWV: '734'
+  href: http://www.bach-digital.de/receive/BachDigitalSource_source_00002076?XSL.Style=structure
+  name: D-B Mus. ms. Bach P 1117
 - work_id: 860
   work: BWV 734a
   title: Es ist gewisslich an der Zeit BWV 734a
@@ -7946,6 +8126,12 @@
   work: BWV 806
   title: Suite, A-Dur (Englische Suiten) BWV 806
   BWV: '806'
+  href: http://www.bach-digital.de/receive/BachDigitalSource_source_00002030?XSL.Style=structure
+  name: D-B Mus. ms. Bach P 1072, Faszikel 1
+- work_id: 938
+  work: BWV 806
+  title: Suite, A-Dur (Englische Suiten) BWV 806
+  BWV: '806'
   href: http://www.bach-digital.de/receive/BachDigitalSource_source_00003503?XSL.Style=structure
   name: D-LEu N. I. 10338, Faszikel 1
 - work_id: 939
@@ -7976,6 +8162,12 @@
   work: BWV 807
   title: Suite, a-Moll (Englische Suiten) BWV 807
   BWV: '807'
+  href: http://www.bach-digital.de/receive/BachDigitalSource_source_00002031?XSL.Style=structure
+  name: D-B Mus. ms. Bach P 1072, Faszikel 2
+- work_id: 940
+  work: BWV 807
+  title: Suite, a-Moll (Englische Suiten) BWV 807
+  BWV: '807'
   href: http://www.bach-digital.de/receive/BachDigitalSource_source_00003503?XSL.Style=structure
   name: D-LEu N. I. 10338, Faszikel 1
 - work_id: 941
@@ -7990,6 +8182,12 @@
   BWV: '808'
   href: http://www.bach-digital.de/receive/BachDigitalSource_source_00001368?XSL.Style=structure
   name: D-B Mus. ms. Bach P 419
+- work_id: 941
+  work: BWV 808
+  title: Suite, g-Moll (Englische Suiten) BWV 808
+  BWV: '808'
+  href: http://www.bach-digital.de/receive/BachDigitalSource_source_00002031?XSL.Style=structure
+  name: D-B Mus. ms. Bach P 1072, Faszikel 2
 - work_id: 941
   work: BWV 808
   title: Suite, g-Moll (Englische Suiten) BWV 808
@@ -8024,6 +8222,12 @@
   work: BWV 809
   title: Suite, F-Dur (Englische Suiten) BWV 809
   BWV: '809'
+  href: http://www.bach-digital.de/receive/BachDigitalSource_source_00002031?XSL.Style=structure
+  name: D-B Mus. ms. Bach P 1072, Faszikel 2
+- work_id: 942
+  work: BWV 809
+  title: Suite, F-Dur (Englische Suiten) BWV 809
+  BWV: '809'
   href: http://www.bach-digital.de/receive/BachDigitalSource_source_00003503?XSL.Style=structure
   name: D-LEu N. I. 10338, Faszikel 1
 - work_id: 943
@@ -8038,6 +8242,12 @@
   BWV: '810'
   href: http://www.bach-digital.de/receive/BachDigitalSource_source_00001368?XSL.Style=structure
   name: D-B Mus. ms. Bach P 419
+- work_id: 943
+  work: BWV 810
+  title: Suite, e-Moll (Englische Suiten) BWV 810
+  BWV: '810'
+  href: http://www.bach-digital.de/receive/BachDigitalSource_source_00002031?XSL.Style=structure
+  name: D-B Mus. ms. Bach P 1072, Faszikel 2
 - work_id: 943
   work: BWV 810
   title: Suite, e-Moll (Englische Suiten) BWV 810
@@ -8068,6 +8278,12 @@
   BWV: '811'
   href: http://www.bach-digital.de/receive/BachDigitalSource_source_00001795?XSL.Style=structure
   name: D-B Mus. ms. Bach P 803, Faszikel 24
+- work_id: 944
+  work: BWV 811
+  title: Suite, d-Moll (Englische Suiten) BWV 811
+  BWV: '811'
+  href: http://www.bach-digital.de/receive/BachDigitalSource_source_00002031?XSL.Style=structure
+  name: D-B Mus. ms. Bach P 1072, Faszikel 2
 - work_id: 944
   work: BWV 811
   title: Suite, d-Moll (Englische Suiten) BWV 811
@@ -8385,6 +8601,18 @@
   work: BWV 825
   title: Partita, B-Dur (Klavierübung, Teil 1) BWV 825
   BWV: '825'
+  href: http://www.bach-digital.de/receive/BachDigitalSource_source_00001941?XSL.Style=structure
+  name: D-B Mus. ms. Bach P 949
+- work_id: 963
+  work: BWV 825
+  title: Partita, B-Dur (Klavierübung, Teil 1) BWV 825
+  BWV: '825'
+  href: http://www.bach-digital.de/receive/BachDigitalSource_source_00002256?XSL.Style=structure
+  name: D-B Mus. ms. Bach P 1206
+- work_id: 963
+  work: BWV 825
+  title: Partita, B-Dur (Klavierübung, Teil 1) BWV 825
+  BWV: '825'
   href: http://www.bach-digital.de/receive/BachDigitalSource_source_00002905?XSL.Style=structure
   name: D-LEb Rara Ib, 3 (olim D Gb Ms. Scholz 4.7.4)
 - work_id: 963
@@ -8411,6 +8639,12 @@
   BWV: '826'
   href: http://www.bach-digital.de/receive/BachDigitalSource_source_00001117?XSL.Style=structure
   name: D-B Mus. ms. Bach P 215
+- work_id: 964
+  work: BWV 826
+  title: Partita, c-Moll (Klavierübung, Teil 1) BWV 826
+  BWV: '826'
+  href: http://www.bach-digital.de/receive/BachDigitalSource_source_00001860?XSL.Style=structure
+  name: D-B Mus. ms. Bach P 815
 - work_id: 964
   work: BWV 826
   title: Partita, c-Moll (Klavierübung, Teil 1) BWV 826
@@ -8505,6 +8739,12 @@
   work: BWV 829
   title: Partita, G-Dur (Klavierübung, Teil 1) BWV 829
   BWV: '829'
+  href: http://www.bach-digital.de/receive/BachDigitalSource_source_00001860?XSL.Style=structure
+  name: D-B Mus. ms. Bach P 815
+- work_id: 967
+  work: BWV 829
+  title: Partita, G-Dur (Klavierübung, Teil 1) BWV 829
+  BWV: '829'
   href: http://www.bach-digital.de/receive/BachDigitalSource_source_00002930?XSL.Style=structure
   name: D-LEb Rara Ib, 53 (olim D Gb Ms. Scholz 5.1.1)
 - work_id: 967
@@ -8585,6 +8825,12 @@
   BWV: '831'
   href: http://www.bach-digital.de/receive/BachDigitalSource_source_00001840?XSL.Style=structure
   name: D-B Mus. ms. Bach P 804, Faszikel 44
+- work_id: 969
+  work: BWV 831
+  title: Ouvertüre nach französischer Art, h-Moll (Klavierübung, Teil 2) BWV 831
+  BWV: '831'
+  href: http://www.bach-digital.de/receive/BachDigitalSource_source_00001856?XSL.Style=structure
+  name: D-B Mus. ms. Bach P 809
 - work_id: 969
   work: BWV 831
   title: Ouvertüre nach französischer Art, h-Moll (Klavierübung, Teil 2) BWV 831
@@ -9687,6 +9933,12 @@
   work: BWV 867
   title: Praeludium und Fuge b-Moll (Das Wohltemperierte Klavier, Teil 1) BWV 867
   BWV: '867'
+  href: http://www.bach-digital.de/receive/BachDigitalSource_source_00001938?XSL.Style=structure
+  name: D-B Mus. ms. Bach P 946
+- work_id: 1028
+  work: BWV 867
+  title: Praeludium und Fuge b-Moll (Das Wohltemperierte Klavier, Teil 1) BWV 867
+  BWV: '867'
   href: http://www.bach-digital.de/receive/BachDigitalSource_source_00002034?XSL.Style=structure
   name: D-B Mus. ms. Bach P 1075
 - work_id: 1028
@@ -9848,6 +10100,12 @@
   BWV: '871'
   href: http://www.bach-digital.de/receive/BachDigitalSource_source_00001654?XSL.Style=structure
   name: D-B Mus. ms. Bach P 595, Faszikel 5
+- work_id: 1037
+  work: BWV 871
+  title: Praeludium und Fuge c-Moll (Das Wohltemperierte Klavier, Teil 2) BWV 871
+  BWV: '871'
+  href: http://www.bach-digital.de/receive/BachDigitalSource_source_00001863?XSL.Style=structure
+  name: D-B Mus. ms. Bach P 818
 - work_id: 1037
   work: BWV 871
   title: Praeludium und Fuge c-Moll (Das Wohltemperierte Klavier, Teil 2) BWV 871
@@ -10324,6 +10582,12 @@
   work: BWV 894
   title: Praeludium und Fuge, a-Moll BWV 894
   BWV: '894'
+  href: http://www.bach-digital.de/receive/BachDigitalSource_source_00002043?XSL.Style=structure
+  name: D-B Mus. ms. Bach P 1084
+- work_id: 1062
+  work: BWV 894
+  title: Praeludium und Fuge, a-Moll BWV 894
+  BWV: '894'
   href: http://www.bach-digital.de/receive/BachDigitalSource_source_00003506?XSL.Style=structure
   name: D-LEu N. I. 10338, Faszikel 4
 - work_id: 1063
@@ -10446,6 +10710,12 @@
   BWV: '903'
   href: http://www.bach-digital.de/receive/BachDigitalSource_source_00001793?XSL.Style=structure
   name: D-B Mus. ms. Bach P 803, Faszikel 22
+- work_id: 1073
+  work: BWV 903
+  title: Chromatische Fantasie und Fuge, d-Moll BWV 903
+  BWV: '903'
+  href: http://www.bach-digital.de/receive/BachDigitalSource_source_00001917?XSL.Style=structure
+  name: D-B Mus. ms. Bach P 887
 - work_id: 1073
   work: BWV 903
   title: Chromatische Fantasie und Fuge, d-Moll BWV 903
@@ -10644,6 +10914,12 @@
   BWV: '914'
   href: http://www.bach-digital.de/receive/BachDigitalSource_source_00010752?XSL.Style=structure
   name: US-NH Misc. Ms. 568
+- work_id: 1088
+  work: BWV 915
+  title: Toccata, g-Moll BWV 915
+  BWV: '915'
+  href: http://www.bach-digital.de/receive/BachDigitalSource_source_00002041?XSL.Style=structure
+  name: D-B Mus. ms. Bach P 1082
 - work_id: 1089
   work: BWV 916
   title: Toccata, G-Dur BWV 916
@@ -10692,6 +10968,12 @@
   BWV: '921'
   href: http://www.bach-digital.de/receive/BachDigitalSource_source_00003278?XSL.Style=structure
   name: D-LEm III.8.4 [Andreas-Bach-Buch]
+- work_id: 1094
+  work: BWV 921
+  title: Praeludium, c-Moll BWV 921
+  BWV: '921'
+  href: http://www.bach-digital.de/receive/BachDigitalSource_source_00003352?XSL.Style=structure
+  name: D-LEb Peters Ms. 7, Faszikel 11 (Depositum im Bach-Archiv)
 - work_id: 1095
   work: BWV 922
   title: Praeludium (Fantasie), a-Moll BWV 922
@@ -10722,6 +11004,42 @@
   BWV: '927'
   href: http://www.bach-digital.de/receive/BachDigitalSource_source_00001849?XSL.Style=structure
   name: D-B Mus. ms. Bach P 804, Faszikel 53
+- work_id: 1108
+  work: BWV 933
+  title: Praeludium, C-Dur (6 kleine Praeludien) BWV 933
+  BWV: '933'
+  href: http://www.bach-digital.de/receive/BachDigitalSource_source_00001916?XSL.Style=structure
+  name: D-B Mus. ms. Bach P 885
+- work_id: 1109
+  work: BWV 934
+  title: Praeludium, c-Moll (6 kleine Praeludien) BWV 934
+  BWV: '934'
+  href: http://www.bach-digital.de/receive/BachDigitalSource_source_00001916?XSL.Style=structure
+  name: D-B Mus. ms. Bach P 885
+- work_id: 1110
+  work: BWV 935
+  title: Praeludium, d-Moll (6 kleine Praeludien) BWV 935
+  BWV: '935'
+  href: http://www.bach-digital.de/receive/BachDigitalSource_source_00001916?XSL.Style=structure
+  name: D-B Mus. ms. Bach P 885
+- work_id: 1111
+  work: BWV 936
+  title: Praeludium, D-Dur (6 kleine Praeludien) BWV 936
+  BWV: '936'
+  href: http://www.bach-digital.de/receive/BachDigitalSource_source_00001916?XSL.Style=structure
+  name: D-B Mus. ms. Bach P 885
+- work_id: 1112
+  work: BWV 937
+  title: Praeludium, E-Dur (6 kleine Praeludien) BWV 937
+  BWV: '937'
+  href: http://www.bach-digital.de/receive/BachDigitalSource_source_00001916?XSL.Style=structure
+  name: D-B Mus. ms. Bach P 885
+- work_id: 1113
+  work: BWV 938
+  title: Praeludium, e-Moll (6 kleine Praeludien) BWV 938
+  BWV: '938'
+  href: http://www.bach-digital.de/receive/BachDigitalSource_source_00001916?XSL.Style=structure
+  name: D-B Mus. ms. Bach P 885
 - work_id: 1114
   work: BWV 939
   title: Praeludium, C-Dur BWV 939
@@ -11179,6 +11497,12 @@
   BWV: '993'
   href: http://www.bach-digital.de/receive/BachDigitalSource_source_00001803?XSL.Style=structure
   name: D-B Mus. ms. Bach P 804, Faszikel 7
+- work_id: 1171
+  work: BWV 993
+  title: Capriccio in Honorem Johann Christoph Bachii, E-Dur BWV 993
+  BWV: '993'
+  href: http://www.bach-digital.de/receive/BachDigitalSource_source_00002046?XSL.Style=structure
+  name: D-B Mus. ms. Bach P 1087
 - work_id: 1174
   work: BWV 996
   title: Suite, e-Moll BWV 996
@@ -11569,6 +11893,18 @@
   BWV: '1027'
   href: http://www.bach-digital.de/receive/BachDigitalSource_source_00001808?XSL.Style=structure
   name: D-B Mus. ms. Bach P 804, Faszikel 12
+- work_id: 1210
+  work: BWV 1028
+  title: Sonate, D-Dur BWV 1028
+  BWV: '1028'
+  href: http://www.bach-digital.de/receive/BachDigitalSource_source_00002014?XSL.Style=structure
+  name: D-B Mus. ms. Bach P 1057, Faszikel 1
+- work_id: 1210
+  work: BWV 1028
+  title: Sonate, D-Dur BWV 1028
+  BWV: '1028'
+  href: http://www.bach-digital.de/receive/BachDigitalSource_source_00002015?XSL.Style=structure
+  name: D-B Mus. ms. Bach P 1057, Faszikel 2
 - work_id: 1212
   work: BWV 1030
   title: Sonata, h-Moll BWV 1030
@@ -11669,8 +12005,26 @@
   work: BWV 1041
   title: Konzert, a-Moll BWV 1041
   BWV: '1041'
+  href: http://www.bach-digital.de/receive/BachDigitalSource_source_00001183?XSL.Style=structure
+  name: D-B Mus. ms. Bach P 252
+- work_id: 1223
+  work: BWV 1041
+  title: Konzert, a-Moll BWV 1041
+  BWV: '1041'
   href: http://www.bach-digital.de/receive/BachDigitalSource_source_00002500?XSL.Style=structure
   name: D-B Mus. ms. Bach St 145
+- work_id: 1224
+  work: BWV 1042
+  title: Konzert, E-Dur BWV 1042
+  BWV: '1042'
+  href: http://www.bach-digital.de/receive/BachDigitalSource_source_00001183?XSL.Style=structure
+  name: D-B Mus. ms. Bach P 252
+- work_id: 1225
+  work: BWV 1043
+  title: Konzert, d-Moll BWV 1043
+  BWV: '1043'
+  href: http://www.bach-digital.de/receive/BachDigitalSource_source_00001185?XSL.Style=structure
+  name: D-B Mus. ms. Bach P 254
 - work_id: 1225
   work: BWV 1043
   title: Konzert, d-Moll BWV 1043
@@ -11691,6 +12045,12 @@
   BWV: '1044'
   href: http://www.bach-digital.de/receive/BachDigitalSource_source_00001180?XSL.Style=structure
   name: D-B Mus. ms. Bach P 249
+- work_id: 1226
+  work: BWV 1044
+  title: Konzert, a-Moll BWV 1044
+  BWV: '1044'
+  href: http://www.bach-digital.de/receive/BachDigitalSource_source_00002488?XSL.Style=structure
+  name: D-B Mus. ms. Bach St 134
 - work_id: 1227
   work: BWV 1045
   title: Fragment einer Einleitungssinfonie zu einer unbekannten Kantate BWV 1045
@@ -11703,18 +12063,37 @@
   BWV: '1046'
   href: http://www.bach-digital.de/receive/BachDigitalSource_source_00000448?XSL.Style=structure
   name: D-B Am.B 78
+- work_id: 1229
+  work: BWV 1046a  (olim 1071)
+  title: Sinfonia, F-Dur (1. Brandenburgisches Konzert, Frühfassung) BWV 1046a  (olim
+    1071)
+  BWV: 1046a
+  href: http://www.bach-digital.de/receive/BachDigitalSource_source_00002019?XSL.Style=structure
+  name: D-B Mus. ms. Bach P 1061
 - work_id: 1230
   work: BWV 1047
   title: Konzert, F-Dur (2. Brandenburgisches Konzert) BWV 1047
   BWV: '1047'
   href: http://www.bach-digital.de/receive/BachDigitalSource_source_00000448?XSL.Style=structure
   name: D-B Am.B 78
+- work_id: 1230
+  work: BWV 1047
+  title: Konzert, F-Dur (2. Brandenburgisches Konzert) BWV 1047
+  BWV: '1047'
+  href: http://www.bach-digital.de/receive/BachDigitalSource_source_00002020?XSL.Style=structure
+  name: D-B Mus. ms. Bach P 1062
 - work_id: 1231
   work: BWV 1048
   title: Konzert, G-Dur (3. Brandenburgisches Konzert) BWV 1048
   BWV: '1048'
   href: http://www.bach-digital.de/receive/BachDigitalSource_source_00000448?XSL.Style=structure
   name: D-B Am.B 78
+- work_id: 1231
+  work: BWV 1048
+  title: Konzert, G-Dur (3. Brandenburgisches Konzert) BWV 1048
+  BWV: '1048'
+  href: http://www.bach-digital.de/receive/BachDigitalSource_source_00002021?XSL.Style=structure
+  name: D-B Mus. ms. Bach P 1063
 - work_id: 1232
   work: BWV 1049
   title: Konzert, G-Dur (4. Brandenburgisches Konzert) BWV 1049
@@ -11763,12 +12142,24 @@
   BWV: '1054'
   href: http://www.bach-digital.de/receive/BachDigitalSource_source_00001156?XSL.Style=structure
   name: D-B Mus. ms. Bach P 234
+- work_id: 1239
+  work: BWV 1054
+  title: Konzert, D-Dur BWV 1054
+  BWV: '1054'
+  href: http://www.bach-digital.de/receive/BachDigitalSource_source_00001165?XSL.Style=structure
+  name: D-B Mus. ms. Bach P 239, Faszikel 3
 - work_id: 1240
   work: BWV 1055
   title: Konzert, A-Dur BWV 1055
   BWV: '1055'
   href: http://www.bach-digital.de/receive/BachDigitalSource_source_00001156?XSL.Style=structure
   name: D-B Mus. ms. Bach P 234
+- work_id: 1240
+  work: BWV 1055
+  title: Konzert, A-Dur BWV 1055
+  BWV: '1055'
+  href: http://www.bach-digital.de/receive/BachDigitalSource_source_00002018?XSL.Style=structure
+  name: D-B Mus. ms. Bach P 1060
 - work_id: 1240
   work: BWV 1055
   title: Konzert, A-Dur BWV 1055
@@ -11781,6 +12172,12 @@
   BWV: '1056'
   href: http://www.bach-digital.de/receive/BachDigitalSource_source_00001156?XSL.Style=structure
   name: D-B Mus. ms. Bach P 234
+- work_id: 1241
+  work: BWV 1056
+  title: Konzert, f-Moll BWV 1056
+  BWV: '1056'
+  href: http://www.bach-digital.de/receive/BachDigitalSource_source_00001163?XSL.Style=structure
+  name: D-B Mus. ms. Bach P 239, Faszikel 1
 - work_id: 1242
   work: BWV 1057
   title: Konzert, F-Dur BWV 1057
@@ -11811,6 +12208,12 @@
   BWV: '1059'
   href: http://www.bach-digital.de/receive/BachDigitalSource_source_00001156?XSL.Style=structure
   name: D-B Mus. ms. Bach P 234
+- work_id: 1245
+  work: BWV 1060
+  title: Konzert, c-Moll BWV 1060
+  BWV: '1060'
+  href: http://www.bach-digital.de/receive/BachDigitalSource_source_00002489?XSL.Style=structure
+  name: D-B Mus. ms. Bach St 136
 - work_id: 1247
   work: BWV 1061a
   title: Konzert, C-Dur BWV 1061a
@@ -11851,6 +12254,12 @@
   work: BWV 1067
   title: Ouvertüre, h-Moll BWV 1067
   BWV: '1067'
+  href: http://www.bach-digital.de/receive/BachDigitalSource_source_00002023?XSL.Style=structure
+  name: D-B Mus. ms. Bach P 1065
+- work_id: 1253
+  work: BWV 1067
+  title: Ouvertüre, h-Moll BWV 1067
+  BWV: '1067'
   href: http://www.bach-digital.de/receive/BachDigitalSource_source_00002509?XSL.Style=structure
   name: D-B Mus. ms. Bach St 154, Faszikel 1
 - work_id: 1253
@@ -11859,6 +12268,12 @@
   BWV: '1067'
   href: http://www.bach-digital.de/receive/BachDigitalSource_source_00002510?XSL.Style=structure
   name: D-B Mus. ms. Bach St 154, Faszikel 2
+- work_id: 1254
+  work: BWV 1068
+  title: Ouvertüre, D-Dur BWV 1068
+  BWV: '1068'
+  href: http://www.bach-digital.de/receive/BachDigitalSource_source_00002012?XSL.Style=structure
+  name: D-B Mus. ms. Bach P 1055
 - work_id: 1254
   work: BWV 1068
   title: Ouvertüre, D-Dur BWV 1068
@@ -11883,6 +12298,12 @@
   BWV: '1079'
   href: http://www.bach-digital.de/receive/BachDigitalSource_source_00001137?XSL.Style=structure
   name: D-B Mus. ms. Bach P 226, Faszikel 1
+- work_id: 1265
+  work: BWV 1079
+  title: Musikalisches Opfer BWV 1079
+  BWV: '1079'
+  href: http://www.bach-digital.de/receive/BachDigitalSource_source_00001166?XSL.Style=structure
+  name: D-B Mus. ms. Bach P 239, Faszikel 4
 - work_id: 1265
   work: BWV 1079
   title: Musikalisches Opfer BWV 1079
@@ -12569,6 +12990,12 @@
   BWV: Anh. 188
   href: http://www.bach-digital.de/receive/BachDigitalSource_source_00003166?XSL.Style=structure
   name: D-LEb Go. S. 57
+- work_id: 1500
+  work: Wq 1
+  title: Cembalokonzert a-Moll Wq 1
+  BWV: Anh. 189
+  href: http://www.bach-digital.de/receive/BachDigitalSource_source_00001164?XSL.Style=structure
+  name: D-B Mus. ms. Bach P 239, Faszikel 2
 - work_id: 1500
   work: Wq 1
   title: Cembalokonzert a-Moll Wq 1

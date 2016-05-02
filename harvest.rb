@@ -157,9 +157,15 @@ class Harvester
     
     work_refs = (@h/"source32s[class='MCRMetaLinkID']//[type='locator']")
     
+    work_links = work_refs.map {|r| format_link(r['title'], NICE_WORK_URL_PATTERN % r['href'])}
+    if work_links.size > 5
+      work_links = work_links[0..4]
+      work_links << "..."
+    end
+    
     header1 = "%s (%s)" % [
       format_link(title, @nice_url),
-      work_refs.map {|r| format_link(r['title'], NICE_WORK_URL_PATTERN % r['href'])}.join(", ")
+      work_links.join(", ")
     ]
     
     header1.encode!('Windows-1252', invalid: :replace, undef: :replace, replace: '?')
@@ -234,6 +240,11 @@ class Harvester
     bwvs = entry.map {|i| i['BWV']}.uniq
     href = entry[0]['href']
     name = entry[0]['name']
+    
+    return if already_processed?(href, name)
+
+    works = bwvs.map {|b| Harvester.format_bwv_dir_name(b)}.join(', ')
+    puts "processing #{works}: #{name}"
 
     if bwvs.size > 1
       range = "%s-%s" % [format_bwv_dir_name(bwvs[0]).safe_dir, format_bwv_dir_name(bwvs[-1]).safe_dir]
@@ -244,13 +255,11 @@ class Harvester
     
     FileUtils.mkdir(TARGET_DIR) rescue nil
 
-    unless already_processed?(href, name)
-      m = new(work, href, bwvs)
-      m.save_info
-      m.make_pdf
-      record_receipt(href)
-    end
-    #end
+    m = new(work, href, bwvs)
+    m.save_info
+    m.make_pdf
+    record_receipt(href)
+
   rescue => e
     puts "Failed to process source for #{work}: #{e.message}"
     e.backtrace.each {|l| puts l}
@@ -276,10 +285,8 @@ end
 idx = 1
 
 manuscripts.each do |h, m|
-  works = m.map {|i| Harvester.format_bwv_dir_name(i['BWV'])}.join(',')
-  next unless works.include?('BWV0248')
-  
-  puts "(#{idx}) processing #{works}: #{m.first['name']}"
+  # works = entry.map {|i| Harvester.format_bwv_dir_name(i['BWV'])}.join(',')
+  # next unless works.include?('BWV1069')
   Harvester.process(m)
   idx += 1
 end
