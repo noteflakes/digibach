@@ -1,7 +1,7 @@
 # http://http://www.bach-digital.de//receive/BachDigitalWork_work_00000001
 # http://http://www.bach-digital.de//receive/BachDigitalWork_work_00000249
 
-$work_range = 1..1725
+$work_range = 1..1727
 #URL_PATTERN = "http://www.bach-digital.de/receive/BachDigitalWork_work_%08d"
 
 WORK_URL_PATTERN = "http://www.bach-digital.de/receive/BachDigitalWork_work_%08d?XSL.Transformer=mei"
@@ -25,7 +25,7 @@ $pool = ThreadPool.new(10)
 require 'net/http/persistent'
 $http_connections = {}
 def http_conn
-  $http_connections[Thread.current] ||= 
+  $http_connections[Thread.current] ||=
     Net::HTTP::Persistent.new('crawl').tap do |h|
       h.read_timeout = 30
       h.open_timeout = 30
@@ -50,12 +50,17 @@ def check_work(id)
   STDOUT << "*"
   url = WORK_URL_PATTERN % id
   h = open_xml(url)
-  
-  work = (h/:work/:identifier)[0].content
-  
+
+  work_tag = (h/:work/:identifier)[0]
+  unless work_tag
+    raise "Could not find XML info: #{url}"
+  end
+
+  work = work_tag.content
+
   bwv_node = (h/:work/:identifier).select {|n| n.content =~ /BWV/}[0] ||
     (h/:work/:identifier)[0]
-  
+
   bwv = case bwv_node.content
   when /BWV\s+(\d+[a-z]?)/
     $1
@@ -70,16 +75,16 @@ def check_work(id)
   else
     bwv_node.content
   end
-  
+
   title = (h/:title)[0].content
-  
+
   sources = (h/:source).map do |n|
     {
       ref: (n/:title)[0].content,
       url: SOURCE_URL_PATTERN % n['xml:id']
     }
   end
-  
+
   sources.each do |s|
     $pool.process {check_source(s[:url], s[:ref], id, work, title, bwv)}
   end
