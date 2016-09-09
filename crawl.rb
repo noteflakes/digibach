@@ -19,6 +19,10 @@ trap("INT") {exit}
 trap("TERM") {exit}
 
 $sources = (YAML.load(IO.read('sources.yml')) rescue nil) || []
+
+# clean sources
+$sources.select! {|s| s[:work].to_i == 0}
+
 $start_sources = $sources.clone
 $pool = ThreadPool.new(10)
 
